@@ -133,6 +133,26 @@ const antennaTipMat = new THREE.MeshStandardMaterial({
   toneMapped: false,
 });
 
+// Real-estate touch: a small pitched-roof "hat" on the robot's head, in the
+// same navy + orange trim as the logo's house mark — this is what turns a
+// generic assistant robot into recognizably "the SmartDeal A2Z robot" rather
+// than requiring a full model swap.
+const roofMat = new THREE.MeshStandardMaterial({ color: "#01143c", roughness: 0.5 });
+const roofTrimMat = new THREE.MeshStandardMaterial({ color: "#d84c01", roughness: 0.3 });
+
+function RoofHat() {
+  return (
+    <group position={[0, 0.3, 0]}>
+      <mesh castShadow receiveShadow rotation={[0, Math.PI / 4, 0]} material={roofMat}>
+        <coneGeometry args={[0.19, 0.15, 4]} />
+      </mesh>
+      <mesh position={[0, -0.075, 0]} rotation={[0, Math.PI / 4, 0]} material={roofTrimMat}>
+        <cylinderGeometry args={[0.195, 0.195, 0.014, 4]} />
+      </mesh>
+    </group>
+  );
+}
+
 function RobotEar({
   position,
   scale = 1,
@@ -659,6 +679,8 @@ function RobotPrototype({
           <sphereGeometry args={[0.28, 64, 64, 0, Math.PI * 2, 0, Math.PI]} />
         </mesh>
 
+        <RoofHat />
+
         <GlassCapsule
           color={design.pantallaColor}
           power={design.pantallaGrosor}
@@ -854,6 +876,12 @@ export function RobotHero({
 }: RobotHeroProps = {}) {
   const containerRef = useRef<HTMLElement>(null);
 
+  // The original fixed "15vw" watermark size clips long strings (it was tuned
+  // for "UITHEFACTORY" and never re-checked against a real caller's text) —
+  // scale it to the actual string length instead, so it stays legible without
+  // ever overflowing its container regardless of what backgroundText is passed.
+  const watermarkVw = Math.min(15, Math.max(6, 88 / (backgroundText.length * 0.62)));
+
   // react-three-fiber sizes <Canvas> via react-use-measure's ResizeObserver on
   // its container, gated behind a "mounted" ref that only flips true inside a
   // (paint-deferred) useEffect. The observer's very first callback — carrying
@@ -943,7 +971,7 @@ export function RobotHero({
             color: "#000000",
             opacity: 0.13,
             letterSpacing: "-0.05em",
-            fontSize: "clamp(4rem, 15vw, 14rem)",
+            fontSize: `clamp(3rem, ${watermarkVw}vw, 12rem)`,
             lineHeight: 1,
             transform: `translate(0px, 40px) rotate(0deg)`,
           }}
