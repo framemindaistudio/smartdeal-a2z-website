@@ -127,50 +127,9 @@ function RobotEyes({ isLovedRef }: { isLovedRef: React.MutableRefObject<boolean>
   );
 }
 
-function generatePbrTextureAsync(): Promise<THREE.CanvasTexture> {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      const size = 128;
-      const canvas = document.createElement("canvas");
-      canvas.width = canvas.height = size;
-      const ctx = canvas.getContext("2d");
-      if (ctx) {
-        ctx.fillStyle = "#dcdcdc";
-        ctx.fillRect(0, 0, size, size);
-        for (let i = 0; i < 800; i++) {
-          ctx.beginPath();
-          ctx.arc(Math.random() * size, Math.random() * size, 0.5 + Math.random(), 0, Math.PI * 2);
-          ctx.fillStyle = Math.random() > 0.15 ? "#222222" : "#dddddd";
-          ctx.fill();
-        }
-      }
-      const tex = new THREE.CanvasTexture(canvas);
-      tex.wrapS = tex.wrapT = THREE.RepeatWrapping;
-      tex.repeat.set(4, 2);
-      resolve(tex);
-    }, 0);
-  });
-}
-
 function RobotAvatarModel() {
   const rootRef = useRef<THREE.Group>(null);
   const isLovedRef = useRef(false);
-  const [colorMap, setColorMap] = useState<THREE.CanvasTexture | null>(null);
-
-  useEffect(() => {
-    let mounted = true;
-    let tex: THREE.CanvasTexture | null = null;
-    generatePbrTextureAsync().then((t) => {
-      if (mounted) {
-        tex = t;
-        setColorMap(t);
-      } else t.dispose();
-    });
-    return () => {
-      mounted = false;
-      tex?.dispose();
-    };
-  }, []);
 
   // Gentle idle sway instead of mouse-follow — this widget stays mounted on
   // every page, so it shouldn't need pointer tracking to feel alive.
@@ -187,17 +146,16 @@ function RobotAvatarModel() {
     setTimeout(() => (isLovedRef.current = false), 1500);
   };
 
-  if (!colorMap) return null;
-
   return (
     <group ref={rootRef} position={[0, -0.28, 0]} onPointerDown={handleClick}>
-      <mesh>
+      {/* Flat chassis material, no procedural noise map — a texture tuned to read
+          as a subtle rough finish on the old full-size hero just aliases into
+          visible grain at this avatar's ~56px render size. */}
+      <mesh material={chassisMat}>
         <sphereGeometry args={[0.43, 32, 32, 0, Math.PI * 2, Math.PI * 0.15, Math.PI * 0.85]} />
-        <meshStandardMaterial color={chassisMat.color} map={colorMap} bumpScale={0.005} roughness={1} />
       </mesh>
-      <mesh position={[0, 0.38, 0]}>
+      <mesh position={[0, 0.38, 0]} material={chassisMat}>
         <cylinderGeometry args={[0.26, 0.28, 0.08, 32]} />
-        <meshStandardMaterial color={chassisMat.color} map={colorMap} roughness={1} />
       </mesh>
       <group position={[0, 0.6, 0]}>
         <mesh material={headMat}>
