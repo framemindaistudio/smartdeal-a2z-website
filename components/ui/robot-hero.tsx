@@ -971,7 +971,7 @@ export function RobotHero({
             color: "#000000",
             opacity: 0.13,
             letterSpacing: "-0.05em",
-            fontSize: `clamp(3rem, ${watermarkVw}vw, 12rem)`,
+            fontSize: `clamp(2.4rem, ${watermarkVw}vw, 12rem)`,
             lineHeight: 1,
             transform: `translate(0px, 40px) rotate(0deg)`,
           }}
