@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { Facebook, Instagram, Linkedin, Youtube, Mail, Phone, MapPin } from "lucide-react";
+import { Mail, Phone, MapPin } from "lucide-react";
+import { Facebook, Instagram, Linkedin, Youtube } from "./SocialIcons";
 import { FOOTER_LINKS, NAV_LINKS, SITE_CONFIG } from "@/lib/site-config";
 
 const SOCIAL_ICONS = {
