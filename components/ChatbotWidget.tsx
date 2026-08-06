@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import * as THREE from "three";
-import { MessageCircle, X } from "lucide-react";
+import { X } from "lucide-react";
 import { SITE_CONFIG } from "@/lib/site-config";
 
 // ---------------------------------------------------------------------------
@@ -431,9 +431,7 @@ export default function ChatbotWidget() {
         ) : (
           <>
             <RobotAvatarCanvas size={56} />
-            <span className="absolute -right-0.5 -top-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-green-500 ring-2 ring-white">
-              <MessageCircle className="h-2.5 w-2.5 text-white" />
-            </span>
+            <span className="absolute -right-0.5 -top-0.5 h-3.5 w-3.5 rounded-full bg-green-500 ring-2 ring-white" />
           </>
         )}
       </button>
