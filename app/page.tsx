@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { ShieldCheck, Handshake, LifeBuoy, BadgePercent, Lock } from "lucide-react";
-import { RobotHero } from "@/components/ui/robot-hero";
-import PlaceholderImage from "@/components/PlaceholderImage";
+import PropertyHero from "@/components/PropertyHero";
 import PropertyCard from "@/components/PropertyCard";
 import SectionHeading from "@/components/SectionHeading";
 import { getFeaturedProperties, PROPERTY_TYPES } from "@/lib/properties";
@@ -41,30 +40,7 @@ export default function Home() {
 
   return (
     <div>
-      <RobotHero
-        showNavbar={false}
-        headline="SmartDeal A2Z – One Platform for All Real Estate Needs"
-        description="Buy, Sell, Rent, Lease, Invest, and Discover Residential, Commercial, Land, Hotels, and More — all on one secure and smart platform."
-        primaryCtaText="Explore Properties"
-        primaryCtaHref="/properties"
-        secondaryCtaText="Post Your Property"
-        secondaryCtaHref="/sell"
-      />
-
-      {/* Same trust stats the CSS hero used to show, now just under the 3D hero */}
-      <section className="border-b border-slate-200 bg-brand py-6">
-        <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-center gap-x-10 gap-y-3 px-4 text-sm text-slate-300 sm:px-6 lg:px-8">
-          {[
-            ["15+", "Pages"],
-            ["100%", "Custom Built"],
-            ["30 Days", "Free Support"],
-          ].map(([n, l]) => (
-            <span key={l} className="font-medium">
-              <span className="font-bold text-white">{n}</span> {l}
-            </span>
-          ))}
-        </div>
-      </section>
+      <PropertyHero />
 
       <section className="border-b border-slate-200 bg-slate-50 py-6">
         <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-center gap-x-10 gap-y-3 px-4 text-sm text-slate-600 sm:px-6 lg:px-8">

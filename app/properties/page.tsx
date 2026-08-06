@@ -24,6 +24,9 @@ export default async function PropertiesPage(props: PageProps<"/properties">) {
       <PropertiesExplorer
         initialLocation={firstValue(searchParams.location)}
         initialType={firstValue(searchParams.type)}
+        initialPurpose={firstValue(searchParams.purpose)}
+        initialMinPrice={firstValue(searchParams.minPrice)}
+        initialMaxPrice={firstValue(searchParams.maxPrice)}
       />
     </div>
   );

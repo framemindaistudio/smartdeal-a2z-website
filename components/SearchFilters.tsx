@@ -5,6 +5,7 @@ import { Search } from "lucide-react";
 
 export interface PropertyFilters {
   keyword: string;
+  purpose: string;
   location: string;
   type: string;
   bedrooms: string;
@@ -15,6 +16,7 @@ export interface PropertyFilters {
 
 export const DEFAULT_FILTERS: PropertyFilters = {
   keyword: "",
+  purpose: "",
   location: "",
   type: "",
   bedrooms: "",
@@ -51,7 +53,16 @@ export default function SearchFilters({
         />
       </div>
 
-      <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
+      <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-7">
+        <div>
+          <label className={labelClass}>Buy / Rent</label>
+          <select className={selectClass} value={filters.purpose} onChange={(e) => set("purpose", e.target.value)}>
+            <option value="">Any</option>
+            <option value="For Sale">Buy</option>
+            <option value="For Rent">Rent</option>
+          </select>
+        </div>
+
         <div>
           <label className={labelClass}>Location</label>
           <select className={selectClass} value={filters.location} onChange={(e) => set("location", e.target.value)}>
@@ -124,7 +135,7 @@ export default function SearchFilters({
         </div>
       </div>
 
-      {(filters.keyword || filters.location || filters.type || filters.bedrooms || filters.minPrice || filters.maxPrice || filters.minArea) && (
+      {(filters.keyword || filters.purpose || filters.location || filters.type || filters.bedrooms || filters.minPrice || filters.maxPrice || filters.minArea) && (
         <button
           type="button"
           onClick={() => onChange(DEFAULT_FILTERS)}

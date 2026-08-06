@@ -9,14 +9,23 @@ import { PROPERTIES } from "@/lib/properties";
 export default function PropertiesExplorer({
   initialLocation = "",
   initialType = "",
+  initialPurpose = "",
+  initialMinPrice = "",
+  initialMaxPrice = "",
 }: {
   initialLocation?: string;
   initialType?: string;
+  initialPurpose?: string;
+  initialMinPrice?: string;
+  initialMaxPrice?: string;
 }) {
   const [filters, setFilters] = useState<PropertyFilters>({
     ...DEFAULT_FILTERS,
     location: initialLocation,
     type: initialType,
+    purpose: initialPurpose,
+    minPrice: initialMinPrice,
+    maxPrice: initialMaxPrice,
   });
   const [view, setView] = useState<"grid" | "list">("grid");
 
@@ -28,6 +37,7 @@ export default function PropertiesExplorer({
           return false;
         }
       }
+      if (filters.purpose && p.purpose !== filters.purpose) return false;
       if (filters.location && p.location !== filters.location) return false;
       if (filters.type && p.type !== filters.type) return false;
       if (filters.bedrooms && p.bedrooms < Number(filters.bedrooms)) return false;

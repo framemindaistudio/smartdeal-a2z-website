@@ -30,7 +30,7 @@ export default function ContactForm({
   if (submitted) {
     return (
       <div className="rounded-xl border border-green-200 bg-green-50 p-6 text-center">
-        <p className="font-semibold text-green-800">Thanks — we've received your enquiry.</p>
+        <p className="font-semibold text-green-800">Thanks — we&apos;ve received your enquiry.</p>
         <p className="mt-1 text-sm text-green-700">Our team will get back to you shortly.</p>
       </div>
     );
