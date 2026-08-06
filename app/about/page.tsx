@@ -10,17 +10,30 @@ export const metadata: Metadata = {
   description: `Learn more about ${SITE_CONFIG.name}.`,
 };
 
+// Verbatim from the client's Company Information onboarding section (2026-08-06).
 const VALUES = [
-  { icon: Target, title: "Our Mission", text: "Placeholder — replace with the client's actual mission statement from onboarding." },
-  { icon: Eye, title: "Our Vision", text: "Placeholder — replace with the client's actual vision statement from onboarding." },
-  { icon: HeartHandshake, title: "Our Promise", text: "Transparent listings, direct communication, and no unnecessary middlemen." },
+  {
+    icon: Target,
+    title: "Our Mission",
+    text: "Our mission is to simplify property transactions by using smart technology, verified information, and secure digital processes that create confidence for every customer.",
+  },
+  {
+    icon: Eye,
+    title: "Our Vision",
+    text: "To become India's most trusted and innovative A2Z Real Estate Operating System, empowering millions of people to buy, sell, rent, invest, and grow through one intelligent platform.",
+  },
+  {
+    icon: HeartHandshake,
+    title: "Why SmartDeal",
+    text: "SmartDeal is not just a real estate platform but a complete property ecosystem where Buyer, Seller, Builder, Developer, Broker and Investor connect on a single secure platform.",
+  },
 ];
 
 const STATS = [
-  { value: "—", label: "Properties Listed" },
+  { value: "—", label: "Properties Sold" },
   { value: "—", label: "Happy Clients" },
-  { value: "—", label: "Cities Covered" },
-  { value: "—", label: "Years of Experience" },
+  { value: "—", label: "Cities Served" },
+  { value: SITE_CONFIG.yearsInBusiness, label: "Years of Experience" },
 ];
 
 export default function AboutPage() {
@@ -28,7 +41,7 @@ export default function AboutPage() {
     <div>
       <PageHero
         title="About Us"
-        description="This page is a structural placeholder — real company information hasn't been submitted via the onboarding portal yet."
+        description={`${SITE_CONFIG.yearsInBusiness} years of experience, one A2Z real estate platform.`}
       />
 
       <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:px-8">
@@ -37,10 +50,18 @@ export default function AboutPage() {
           <div>
             <SectionHeading eyebrow="Who We Are" title={`About ${SITE_CONFIG.name}`} />
             <p className="text-slate-600">
-              [Placeholder company story] — {SITE_CONFIG.name} is a real estate platform built to make
-              browsing, searching and enquiring about properties simple and transparent. Replace this
-              paragraph with the client&apos;s actual company background once the onboarding portal&apos;s
-              &ldquo;Company Information&rdquo; section is filled in.
+              SmartDeal A2Z Real Estate Platform is a next-generation PropTech company dedicated to
+              transforming the real estate industry through technology, transparency, and trust. Our
+              platform connects buyers, sellers, builders, developers, brokers, investors, landlords, and
+              service providers on a single digital ecosystem, making every property transaction faster,
+              safer, and more efficient.
+            </p>
+            <p className="mt-4 text-slate-600">
+              From residential, commercial, plots, farmland, hotels, rentals, and investment opportunities
+              to lead management, CRM, digital documentation, marketing, and business analytics, SmartDeal
+              A2Z provides complete end-to-end real estate solutions. Backed by {SITE_CONFIG.yearsInBusiness}{" "}
+              years of business experience, SmartDeal A2Z delivers a trusted, transparent, and
+              technology-driven real estate platform for buyers, sellers, developers, and channel partners.
             </p>
           </div>
         </div>

@@ -1,31 +1,38 @@
 import Link from "next/link";
-import { Search, ShieldCheck, Handshake, TrendingUp } from "lucide-react";
+import { ShieldCheck, Handshake, LifeBuoy, BadgePercent, Lock } from "lucide-react";
 import { RobotHero } from "@/components/ui/robot-hero";
 import PlaceholderImage from "@/components/PlaceholderImage";
 import PropertyCard from "@/components/PropertyCard";
 import SectionHeading from "@/components/SectionHeading";
 import { getFeaturedProperties, PROPERTY_TYPES } from "@/lib/properties";
 
+// "Why Choose SmartDeal" — verbatim from the client's Homepage Content
+// onboarding section (filled in 2026-08-06), icons assigned by us.
 const WHY_US = [
   {
     icon: ShieldCheck,
-    title: "Verified Listings",
-    text: "Every property is checked for accurate details before it goes live.",
-  },
-  {
-    icon: Search,
-    title: "Powerful Search",
-    text: "Filter by location, budget, type, bedrooms, bathrooms and area in seconds.",
+    title: "Verified Properties",
+    text: "Every listing is carefully verified for authenticity and transparency.",
   },
   {
     icon: Handshake,
-    title: "Direct Enquiries",
-    text: "Reach out via form, call or WhatsApp — no middlemen, no clutter.",
+    title: "Trusted Builders & Developers",
+    text: "Partner with reliable builders, developers, and property owners.",
   },
   {
-    icon: TrendingUp,
-    title: "Fresh Inventory",
-    text: "New properties added regularly across residential and commercial segments.",
+    icon: LifeBuoy,
+    title: "End-to-End Assistance",
+    text: "Complete support from property search and site visits to documentation and deal closure.",
+  },
+  {
+    icon: BadgePercent,
+    title: "Best Deals & Fair Pricing",
+    text: "Competitive prices with expert guidance to help you make the right investment.",
+  },
+  {
+    icon: Lock,
+    title: "Secure & Transparent Process",
+    text: "Honest communication, clear documentation, and a hassle-free buying and selling experience.",
   },
 ];
 
@@ -34,7 +41,15 @@ export default function Home() {
 
   return (
     <div>
-      <RobotHero showNavbar={false} />
+      <RobotHero
+        showNavbar={false}
+        headline="SmartDeal A2Z – One Platform for All Real Estate Needs"
+        description="Buy, Sell, Rent, Lease, Invest, and Discover Residential, Commercial, Land, Hotels, and More — all on one secure and smart platform."
+        primaryCtaText="Explore Properties"
+        primaryCtaHref="/properties"
+        secondaryCtaText="Post Your Property"
+        secondaryCtaHref="/sell"
+      />
 
       {/* Same trust stats the CSS hero used to show, now just under the 3D hero */}
       <section className="border-b border-slate-200 bg-brand py-6">
@@ -84,8 +99,8 @@ export default function Home() {
 
       <section className="bg-slate-50 py-16">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-          <SectionHeading title="Why Choose Us" align="center" />
-          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+          <SectionHeading title="Why Choose SmartDeal" align="center" />
+          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {WHY_US.map(({ icon: Icon, title, text }) => (
               <div key={title} className="text-center">
                 <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-orange-100 text-orange-700">
@@ -111,7 +126,7 @@ export default function Home() {
             href="/sell"
             className="shrink-0 rounded-md bg-orange-500 px-6 py-3 text-sm font-semibold text-slate-950 hover:bg-orange-400"
           >
-            List Your Property
+            Post Your Property
           </Link>
         </div>
       </section>
