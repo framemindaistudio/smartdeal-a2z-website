@@ -128,7 +128,7 @@ export default function SearchFilters({
         <button
           type="button"
           onClick={() => onChange(DEFAULT_FILTERS)}
-          className="mt-4 text-xs font-medium text-amber-700 hover:underline"
+          className="mt-4 text-xs font-medium text-orange-700 hover:underline"
         >
           Clear all filters
         </button>

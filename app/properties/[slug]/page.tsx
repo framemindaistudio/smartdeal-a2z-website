@@ -40,7 +40,7 @@ export default async function PropertyDetailsPage(props: PageProps<"/properties/
 
       <div className="mb-6 flex flex-wrap items-start justify-between gap-4">
         <div>
-          <span className="mb-2 inline-block rounded-full bg-amber-100 px-3 py-1 text-xs font-semibold text-amber-800">
+          <span className="mb-2 inline-block rounded-full bg-orange-100 px-3 py-1 text-xs font-semibold text-orange-800">
             {property.type} · {property.purpose}
           </span>
           <h1 className="text-2xl font-bold text-slate-900 sm:text-3xl">{property.title}</h1>
@@ -86,7 +86,7 @@ export default async function PropertyDetailsPage(props: PageProps<"/properties/
             <ul className="grid gap-2 sm:grid-cols-2">
               {property.highlights.map((h) => (
                 <li key={h} className="flex items-start gap-2 text-sm text-slate-600">
-                  <Check className="mt-0.5 h-4 w-4 shrink-0 text-amber-600" /> {h}
+                  <Check className="mt-0.5 h-4 w-4 shrink-0 text-orange-600" /> {h}
                 </li>
               ))}
             </ul>
@@ -97,7 +97,7 @@ export default async function PropertyDetailsPage(props: PageProps<"/properties/
             <ul className="grid gap-2 sm:grid-cols-2">
               {property.amenities.map((a) => (
                 <li key={a} className="flex items-start gap-2 text-sm text-slate-600">
-                  <Check className="mt-0.5 h-4 w-4 shrink-0 text-amber-600" /> {a}
+                  <Check className="mt-0.5 h-4 w-4 shrink-0 text-orange-600" /> {a}
                 </li>
               ))}
             </ul>
@@ -118,7 +118,7 @@ export default async function PropertyDetailsPage(props: PageProps<"/properties/
         <div className="space-y-4">
           <a
             href={`tel:${SITE_CONFIG.phone.replace(/\s+/g, "")}`}
-            className="flex w-full items-center justify-center gap-2 rounded-md bg-slate-900 px-4 py-3 text-sm font-semibold text-white hover:bg-slate-800"
+            className="flex w-full items-center justify-center gap-2 rounded-md bg-brand px-4 py-3 text-sm font-semibold text-white hover:bg-brand-dark"
           >
             <Phone className="h-4 w-4" /> Call About This Property
           </a>

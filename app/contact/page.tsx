@@ -32,7 +32,7 @@ export default function ContactPage() {
             <div className="grid gap-4 sm:grid-cols-2">
               {DETAILS.map(({ icon: Icon, label, value }) => (
                 <div key={label} className="rounded-xl border border-slate-200 bg-white p-5">
-                  <Icon className="mb-2 h-5 w-5 text-amber-600" />
+                  <Icon className="mb-2 h-5 w-5 text-orange-600" />
                   <p className="text-xs font-medium uppercase tracking-wide text-slate-400">{label}</p>
                   <p className="mt-1 text-sm font-medium text-slate-800">{value}</p>
                 </div>

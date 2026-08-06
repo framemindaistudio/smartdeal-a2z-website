@@ -51,7 +51,7 @@ export default function PropertiesExplorer({
           <button
             type="button"
             onClick={() => setView("grid")}
-            className={`rounded p-1.5 ${view === "grid" ? "bg-slate-900 text-white" : "text-slate-500"}`}
+            className={`rounded p-1.5 ${view === "grid" ? "bg-brand text-white" : "text-slate-500"}`}
             aria-label="Grid view"
             aria-pressed={view === "grid"}
           >
@@ -60,7 +60,7 @@ export default function PropertiesExplorer({
           <button
             type="button"
             onClick={() => setView("list")}
-            className={`rounded p-1.5 ${view === "list" ? "bg-slate-900 text-white" : "text-slate-500"}`}
+            className={`rounded p-1.5 ${view === "list" ? "bg-brand text-white" : "text-slate-500"}`}
             aria-label="List view"
             aria-pressed={view === "list"}
           >

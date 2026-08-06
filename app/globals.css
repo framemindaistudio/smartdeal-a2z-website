@@ -3,6 +3,10 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  /* Sampled directly from the client's actual logo (SmartDeal A2Z logo.jpg) */
+  --brand: #01143c;
+  --brand-dark: #000a1f;
+  --brand-light: #0a2657;
 }
 
 @theme inline {
@@ -10,11 +14,40 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --color-brand: var(--brand);
+  --color-brand-dark: var(--brand-dark);
+  --color-brand-light: var(--brand-light);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
+}
+
+/* Hero motion — aurora drift, entrance fade, gentle float for the floating
+   glass cards. Referenced via Tailwind arbitrary-value animate-[...] classes. */
+@keyframes aurora-drift {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(4%, -5%) scale(1.08); }
+  66% { transform: translate(-4%, 4%) scale(0.95); }
+}
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-14px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 /* Wireframe stage: this build intentionally does NOT support a dark mode toggle

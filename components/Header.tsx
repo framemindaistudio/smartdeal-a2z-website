@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { Menu, X, Phone } from "lucide-react";
 import { NAV_LINKS, SITE_CONFIG } from "@/lib/site-config";
@@ -11,8 +12,15 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-50 border-b border-slate-200 bg-white/95 backdrop-blur">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6 lg:px-8">
-        <Link href="/" className="text-lg font-bold tracking-tight text-slate-900">
-          {SITE_CONFIG.name}
+        <Link href="/" className="flex items-center">
+          <Image
+            src="/logo.png"
+            alt={SITE_CONFIG.name}
+            width={480}
+            height={163}
+            priority
+            className="h-10 w-auto sm:h-11"
+          />
         </Link>
 
         <nav className="hidden items-center gap-6 md:flex">
@@ -30,7 +38,7 @@ export default function Header() {
         <div className="hidden items-center gap-4 md:flex">
           <a
             href={`tel:${SITE_CONFIG.phone.replace(/\s+/g, "")}`}
-            className="flex items-center gap-2 rounded-md bg-slate-900 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-slate-800"
+            className="flex items-center gap-2 rounded-md bg-brand px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-brand-dark"
           >
             <Phone className="h-4 w-4" />
             Call Now
@@ -65,7 +73,7 @@ export default function Header() {
             <li>
               <a
                 href={`tel:${SITE_CONFIG.phone.replace(/\s+/g, "")}`}
-                className="mt-2 block rounded-md bg-slate-900 px-3 py-2 text-center text-sm font-semibold text-white"
+                className="mt-2 block rounded-md bg-brand px-3 py-2 text-center text-sm font-semibold text-white"
               >
                 Call Now
               </a>

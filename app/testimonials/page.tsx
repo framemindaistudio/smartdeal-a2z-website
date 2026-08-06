@@ -28,7 +28,7 @@ export default function TestimonialsPage() {
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {TESTIMONIALS.map((t, i) => (
             <div key={i} className="flex flex-col rounded-xl border border-slate-200 bg-white p-6">
-              <div className="mb-3 flex gap-0.5 text-amber-500">
+              <div className="mb-3 flex gap-0.5 text-orange-500">
                 {Array.from({ length: 5 }).map((_, idx) => (
                   <Star key={idx} className="h-4 w-4" fill="currentColor" />
                 ))}

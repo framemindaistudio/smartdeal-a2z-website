@@ -6,7 +6,7 @@ export default function PageHero({
   description?: string;
 }) {
   return (
-    <section className="bg-slate-900 py-16 text-white sm:py-20">
+    <section className="bg-brand py-16 text-white sm:py-20">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <h1 className="text-3xl font-bold sm:text-4xl">{title}</h1>
         {description && (

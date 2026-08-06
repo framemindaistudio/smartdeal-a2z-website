@@ -15,7 +15,7 @@ export default function BuyPage() {
 
   return (
     <div>
-      <section className="bg-slate-900 py-16 text-white sm:py-20">
+      <section className="bg-brand py-16 text-white sm:py-20">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <h1 className="text-3xl font-bold sm:text-4xl">Buy a Property</h1>
           <p className="mt-3 max-w-2xl text-slate-300">
@@ -42,7 +42,7 @@ export default function BuyPage() {
         <div className="mt-8 text-center">
           <Link
             href="/properties"
-            className="inline-block rounded-md bg-slate-900 px-6 py-2.5 text-sm font-semibold text-white hover:bg-slate-800"
+            className="inline-block rounded-md bg-brand px-6 py-2.5 text-sm font-semibold text-white hover:bg-brand-dark"
           >
             View All Properties
           </Link>
@@ -59,7 +59,7 @@ export default function BuyPage() {
               { step: "3", title: "Connect & Visit", text: "Our team gets back to you to arrange details and a site visit." },
             ].map((s) => (
               <div key={s.step} className="text-center">
-                <div className="mx-auto mb-4 flex h-10 w-10 items-center justify-center rounded-full bg-slate-900 text-sm font-bold text-white">
+                <div className="mx-auto mb-4 flex h-10 w-10 items-center justify-center rounded-full bg-brand text-sm font-bold text-white">
                   {s.step}
                 </div>
                 <p className="font-semibold text-slate-900">{s.title}</p>

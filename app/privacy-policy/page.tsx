@@ -12,7 +12,7 @@ export default function PrivacyPolicyPage() {
     <div>
       <PageHero title="Privacy Policy" />
       <section className="mx-auto max-w-3xl px-4 py-16 sm:px-6 lg:px-8">
-        <div className="mb-8 rounded-lg border border-amber-200 bg-amber-50 p-4 text-sm text-amber-900">
+        <div className="mb-8 rounded-lg border border-orange-200 bg-orange-50 p-4 text-sm text-orange-900">
           <strong>Draft template — not legal advice.</strong> This is generic placeholder
           text for structural purposes only. It has not been reviewed by a lawyer and must
           be reviewed/replaced before go-live, per the client&apos;s actual data practices

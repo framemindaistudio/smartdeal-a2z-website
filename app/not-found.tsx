@@ -12,7 +12,7 @@ export default function NotFound() {
       <div className="mt-8 flex flex-wrap justify-center gap-4">
         <Link
           href="/"
-          className="flex items-center gap-2 rounded-md bg-slate-900 px-5 py-2.5 text-sm font-semibold text-white hover:bg-slate-800"
+          className="flex items-center gap-2 rounded-md bg-brand px-5 py-2.5 text-sm font-semibold text-white hover:bg-brand-dark"
         >
           <Home className="h-4 w-4" /> Back Home
         </Link>

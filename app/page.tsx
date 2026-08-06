@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Search, ShieldCheck, Handshake, TrendingUp } from "lucide-react";
+import { Search, ShieldCheck, Handshake, TrendingUp, Home as HomeIcon } from "lucide-react";
 import PlaceholderImage from "@/components/PlaceholderImage";
 import PropertyCard from "@/components/PropertyCard";
 import SectionHeading from "@/components/SectionHeading";
@@ -34,14 +34,35 @@ export default function Home() {
 
   return (
     <div>
-      <section className="relative overflow-hidden bg-slate-900 text-white">
-        <div className="mx-auto grid max-w-6xl gap-10 px-4 py-20 sm:px-6 lg:grid-cols-2 lg:items-center lg:px-8 lg:py-28">
-          <div>
-            <p className="mb-3 text-sm font-semibold uppercase tracking-wide text-amber-400">
-              {SITE_CONFIG.name}
-            </p>
-            <h1 className="text-4xl font-bold leading-tight sm:text-5xl">
-              Find your next property, the smart way.
+      <section className="relative overflow-hidden bg-brand text-white">
+        {/* Aurora glow field */}
+        <div className="pointer-events-none absolute inset-0 overflow-hidden">
+          <div className="absolute -left-32 -top-32 h-96 w-96 rounded-full bg-orange-600/30 blur-3xl animate-[aurora-drift_18s_ease-in-out_infinite]" />
+          <div className="absolute -right-24 top-1/4 h-[28rem] w-[28rem] rounded-full bg-blue-500/15 blur-3xl animate-[aurora-drift_22s_ease-in-out_infinite_reverse]" />
+          <div className="absolute -bottom-24 left-1/3 h-72 w-72 rounded-full bg-orange-500/20 blur-3xl animate-[aurora-drift_25s_ease-in-out_infinite]" />
+        </div>
+
+        {/* Tech grid texture */}
+        <div
+          className="pointer-events-none absolute inset-0 opacity-[0.06]"
+          style={{
+            backgroundImage:
+              "linear-gradient(to right, white 1px, transparent 1px), linear-gradient(to bottom, white 1px, transparent 1px)",
+            backgroundSize: "44px 44px",
+          }}
+        />
+
+        <div className="relative mx-auto grid max-w-6xl gap-10 px-4 py-20 sm:px-6 lg:grid-cols-2 lg:items-center lg:px-8 lg:py-28">
+          <div className="animate-[fade-up_0.7s_ease-out]">
+            <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-xs font-medium text-orange-300 backdrop-blur-sm">
+              <span className="h-1.5 w-1.5 rounded-full bg-orange-400 animate-pulse" />
+              {SITE_CONFIG.name} · Property Platform
+            </div>
+            <h1 className="text-4xl font-bold leading-[1.1] tracking-tight sm:text-5xl lg:text-[3.4rem]">
+              Find your next property,{" "}
+              <span className="bg-gradient-to-r from-orange-400 via-orange-300 to-amber-200 bg-clip-text text-transparent">
+                the smart way.
+              </span>
             </h1>
             <p className="mt-5 max-w-lg text-slate-300">
               Browse, search and enquire about verified properties with a fast, modern,
@@ -50,19 +71,64 @@ export default function Home() {
             <div className="mt-8 flex flex-wrap gap-4">
               <Link
                 href="/properties"
-                className="rounded-md bg-amber-500 px-6 py-3 text-sm font-semibold text-slate-950 transition-colors hover:bg-amber-400"
+                className="rounded-lg bg-orange-500 px-6 py-3 text-sm font-semibold text-white shadow-[0_0_0_0_rgba(216,76,1,0.5)] transition-shadow duration-300 hover:shadow-[0_0_32px_4px_rgba(216,76,1,0.45)]"
               >
                 Browse Properties
               </Link>
               <Link
                 href="/sell"
-                className="rounded-md border border-white/30 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-white/10"
+                className="rounded-lg border border-white/20 bg-white/5 px-6 py-3 text-sm font-semibold text-white backdrop-blur-sm transition-colors hover:bg-white/10"
               >
                 Sell Your Property
               </Link>
             </div>
+            <div className="mt-10 flex flex-wrap gap-x-8 gap-y-3 border-t border-white/10 pt-6">
+              {[
+                ["15+", "Pages"],
+                ["100%", "Custom Built"],
+                ["30 Days", "Free Support"],
+              ].map(([n, l]) => (
+                <div key={l}>
+                  <p className="text-xl font-bold text-white">{n}</p>
+                  <p className="text-xs text-slate-400">{l}</p>
+                </div>
+              ))}
+            </div>
           </div>
-          <PlaceholderImage label="Hero Property Photo" variant="brand" aspect="aspect-[4/3]" />
+
+          {/* Floating glass card composition */}
+          <div className="relative hidden h-[440px] lg:block">
+            <div className="absolute left-1/2 top-1/2 -z-10 h-72 w-72 -translate-x-1/2 -translate-y-1/2 rounded-full bg-orange-500/20 blur-3xl" />
+
+            <div className="absolute left-2 top-8 w-[78%] animate-[float_6s_ease-in-out_infinite] rounded-2xl border border-white/10 bg-white/5 p-3 shadow-2xl backdrop-blur-md">
+              <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl bg-gradient-to-br from-brand-light to-brand">
+                <div className="absolute inset-0 flex items-center justify-center text-white/15">
+                  <HomeIcon className="h-16 w-16" strokeWidth={1} />
+                </div>
+              </div>
+              <div className="mt-3 flex items-center justify-between px-1">
+                <div>
+                  <p className="text-sm font-semibold text-white">Sunrise Heights</p>
+                  <p className="text-xs text-slate-400">Indiranagar, Bengaluru</p>
+                </div>
+                <p className="text-sm font-bold text-orange-400">₹98L</p>
+              </div>
+            </div>
+
+            <div className="absolute -right-2 top-0 animate-[float_7s_ease-in-out_infinite_1s] rounded-xl border border-white/10 bg-white/10 px-4 py-3 shadow-xl backdrop-blur-md">
+              <p className="text-2xl font-bold text-white">8+</p>
+              <p className="text-xs text-slate-300">Live Listings</p>
+            </div>
+
+            <div className="absolute bottom-6 right-4 flex animate-[float_8s_ease-in-out_infinite_0.5s] items-center gap-2 rounded-full border border-white/10 bg-white/10 px-4 py-2.5 shadow-xl backdrop-blur-md">
+              <Search className="h-4 w-4 text-orange-400" />
+              <span className="text-xs text-white">3BHK in Bengaluru…</span>
+            </div>
+
+            <div className="absolute -left-4 bottom-16 animate-[float_9s_ease-in-out_infinite_1.5s] rounded-xl border border-white/10 bg-white/10 px-3 py-2 shadow-xl backdrop-blur-md">
+              <p className="text-xs font-medium text-white">Verified ✓</p>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -103,7 +169,7 @@ export default function Home() {
           <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
             {WHY_US.map(({ icon: Icon, title, text }) => (
               <div key={title} className="text-center">
-                <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-amber-100 text-amber-700">
+                <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-orange-100 text-orange-700">
                   <Icon className="h-6 w-6" />
                 </div>
                 <p className="font-semibold text-slate-900">{title}</p>
@@ -115,7 +181,7 @@ export default function Home() {
       </section>
 
       <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:px-8">
-        <div className="flex flex-col items-center justify-between gap-6 rounded-2xl bg-slate-900 px-8 py-12 text-center text-white sm:flex-row sm:text-left">
+        <div className="flex flex-col items-center justify-between gap-6 rounded-2xl bg-brand px-8 py-12 text-center text-white sm:flex-row sm:text-left">
           <div>
             <h2 className="text-2xl font-bold">Looking to sell instead?</h2>
             <p className="mt-2 text-slate-300">
@@ -124,7 +190,7 @@ export default function Home() {
           </div>
           <Link
             href="/sell"
-            className="shrink-0 rounded-md bg-amber-500 px-6 py-3 text-sm font-semibold text-slate-950 hover:bg-amber-400"
+            className="shrink-0 rounded-md bg-orange-500 px-6 py-3 text-sm font-semibold text-slate-950 hover:bg-orange-400"
           >
             List Your Property
           </Link>

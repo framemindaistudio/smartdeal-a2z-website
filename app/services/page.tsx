@@ -31,7 +31,7 @@ export default function ServicesPage() {
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {SERVICES.map(({ icon: Icon, title, text }) => (
             <div key={title} className="rounded-xl border border-slate-200 bg-white p-6">
-              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-amber-100 text-amber-700">
+              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-orange-100 text-orange-700">
                 <Icon className="h-6 w-6" />
               </div>
               <p className="font-semibold text-slate-900">{title}</p>
@@ -43,7 +43,7 @@ export default function ServicesPage() {
         <div className="mt-12 text-center">
           <Link
             href="/contact"
-            className="inline-block rounded-md bg-slate-900 px-6 py-2.5 text-sm font-semibold text-white hover:bg-slate-800"
+            className="inline-block rounded-md bg-brand px-6 py-2.5 text-sm font-semibold text-white hover:bg-brand-dark"
           >
             Get in Touch
           </Link>

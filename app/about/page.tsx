@@ -52,7 +52,7 @@ export default function AboutPage() {
           <div className="grid gap-8 sm:grid-cols-3">
             {VALUES.map(({ icon: Icon, title, text }) => (
               <div key={title} className="rounded-xl border border-slate-200 bg-white p-6 text-center">
-                <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-amber-100 text-amber-700">
+                <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-orange-100 text-orange-700">
                   <Icon className="h-6 w-6" />
                 </div>
                 <p className="font-semibold text-slate-900">{title}</p>
@@ -64,10 +64,10 @@ export default function AboutPage() {
       </section>
 
       <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-2 gap-6 rounded-2xl bg-slate-900 p-10 text-center text-white sm:grid-cols-4">
+        <div className="grid grid-cols-2 gap-6 rounded-2xl bg-brand p-10 text-center text-white sm:grid-cols-4">
           {STATS.map((s) => (
             <div key={s.label}>
-              <p className="text-3xl font-bold text-amber-400">{s.value}</p>
+              <p className="text-3xl font-bold text-orange-400">{s.value}</p>
               <p className="mt-1 text-sm text-slate-300">{s.label}</p>
             </div>
           ))}

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { Mail, Phone, MapPin } from "lucide-react";
 import { Facebook, Instagram, Linkedin, Youtube } from "./SocialIcons";
@@ -14,12 +15,14 @@ export default function Footer() {
   const socialEntries = Object.entries(SITE_CONFIG.social).filter(([, url]) => url);
 
   return (
-    <footer className="mt-24 border-t border-slate-200 bg-slate-950 text-slate-300">
+    <footer className="mt-24 border-t border-slate-200 bg-brand-dark text-slate-300">
       <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
           <div>
-            <p className="text-lg font-bold text-white">{SITE_CONFIG.name}</p>
-            <p className="mt-2 text-sm text-slate-400">{SITE_CONFIG.tagline}</p>
+            <div className="inline-block rounded-lg bg-white px-3 py-2">
+              <Image src="/logo.png" alt={SITE_CONFIG.name} width={480} height={163} className="h-9 w-auto" />
+            </div>
+            <p className="mt-3 text-sm text-slate-400">{SITE_CONFIG.tagline}</p>
             <div className="mt-4 flex gap-3">
               {socialEntries.length > 0 ? (
                 socialEntries.map(([key, url]) => {

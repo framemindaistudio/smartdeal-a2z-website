@@ -30,13 +30,13 @@ export default function PropertyCard({
 
       <div className="flex flex-1 flex-col p-5">
         <div className="mb-2 flex items-center justify-between gap-2">
-          <span className="rounded-full bg-amber-100 px-3 py-1 text-xs font-semibold text-amber-800">
+          <span className="rounded-full bg-orange-100 px-3 py-1 text-xs font-semibold text-orange-800">
             {property.type}
           </span>
           <span className="text-xs font-medium text-slate-500">{property.purpose}</span>
         </div>
 
-        <h3 className="text-lg font-semibold text-slate-900 group-hover:text-amber-700">
+        <h3 className="text-lg font-semibold text-slate-900 group-hover:text-orange-700">
           {property.title}
         </h3>
 

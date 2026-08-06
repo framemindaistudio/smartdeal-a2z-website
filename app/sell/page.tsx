@@ -40,7 +40,7 @@ export default function SellPage() {
         <div className="grid gap-8 sm:grid-cols-3">
           {STEPS.map(({ icon: Icon, title, text }) => (
             <div key={title} className="text-center">
-              <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-amber-100 text-amber-700">
+              <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-orange-100 text-orange-700">
                 <Icon className="h-6 w-6" />
               </div>
               <p className="font-semibold text-slate-900">{title}</p>
