@@ -289,9 +289,9 @@ function buildChatNodes(): Record<string, ChatNode> {
       ],
     },
     rent: {
-      bot: "Looking to rent? Here's our full inventory — you can filter by budget and location there.",
+      bot: "Looking to rent? Here's our rentals page — you can filter by budget and location there.",
       options: [
-        { label: "Browse properties", action: { type: "link", href: "/properties" } },
+        { label: "Browse rentals", action: { type: "link", href: "/rent" } },
         { label: "⬅ Back to menu", action: { type: "menu", nodeId: "root" } },
       ],
     },

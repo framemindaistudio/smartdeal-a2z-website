@@ -5,7 +5,11 @@ import { useState, type FormEvent } from "react";
 import { Search } from "lucide-react";
 import { PROPERTY_LOCATIONS, PROPERTY_TYPES } from "@/lib/properties";
 
-export default function QuickSearch() {
+export default function QuickSearch({
+  purpose,
+}: {
+  purpose?: "For Sale" | "For Rent";
+}) {
   const router = useRouter();
   const [location, setLocation] = useState("");
   const [type, setType] = useState("");
@@ -13,6 +17,7 @@ export default function QuickSearch() {
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const params = new URLSearchParams();
+    if (purpose) params.set("purpose", purpose);
     if (location) params.set("location", location);
     if (type) params.set("type", type);
     router.push(`/properties${params.toString() ? `?${params.toString()}` : ""}`);
