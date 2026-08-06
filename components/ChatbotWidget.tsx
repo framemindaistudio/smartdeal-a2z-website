@@ -1,207 +1,52 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
-import * as THREE from "three";
 import { X } from "lucide-react";
 import { SITE_CONFIG } from "@/lib/site-config";
 
 // ---------------------------------------------------------------------------
-// Robot avatar — a trimmed-down copy of the model built for the old 3D hero
-// (components/ui/robot-hero.tsx, now removed). Kept only what's visible at
-// launcher size: no ContactShadows, no Environment HDRI, no mouse-follow —
-// just the geometry/materials plus a light idle sway, so this can stay
-// mounted site-wide (every page, via the layout) without the cost the full
-// hero scene had.
+// Chatbot icon — flat SVG, not a 3D render. The old WebGL avatar (a trimmed
+// copy of the model built for the old 3D hero) never looked right shrunk to
+// launcher size: a fixed canvas-sizing race with react-use-measure, then a
+// procedural texture that aliased into visible grain at ~56px. Vector art
+// has neither problem and stays pixel-crisp at any size. Keeps the one detail
+// worth keeping from that model — the roof accent — as the "real estate"
+// signifier requested earlier.
 // ---------------------------------------------------------------------------
 
-class HeartCurve extends THREE.Curve<THREE.Vector3> {
-  constructor() {
-    super();
-  }
-  getPoint(t: number, target = new THREE.Vector3()) {
-    t = t * Math.PI * 2;
-    const x = 16 * Math.pow(Math.sin(t), 3);
-    const y = 13 * Math.cos(t) - 5 * Math.cos(2 * t) - 2 * Math.cos(3 * t) - Math.cos(4 * t);
-    return target.set(x * 0.002, (y + 6) * 0.002, 0);
-  }
-}
-const sharedHeartCurve = new HeartCurve();
-
-const chassisMat = new THREE.MeshStandardMaterial({ color: "#c4c4c4", roughness: 0.85 });
-const headMat = new THREE.MeshStandardMaterial({ color: "#111111", roughness: 1.0 });
-const earBaseMat = new THREE.MeshStandardMaterial({ color: "#f0f0f0", roughness: 0.5 });
-const earRingMat = new THREE.MeshStandardMaterial({ color: "#ffffff", roughness: 0.3 });
-const earCenterMat = new THREE.MeshStandardMaterial({ color: "#cccccc", roughness: 0.8 });
-const antennaBaseMat = new THREE.MeshStandardMaterial({ color: "#999999", roughness: 0.4, metalness: 0.5 });
-const antennaStickMat = new THREE.MeshStandardMaterial({ color: "#d0d0d0", roughness: 0.4, metalness: 0.2 });
-const antennaTipMat = new THREE.MeshStandardMaterial({ color: "#d84c01", roughness: 0.2, toneMapped: false });
-const roofMat = new THREE.MeshStandardMaterial({ color: "#0e3b2e", roughness: 0.5 });
-const roofTrimMat = new THREE.MeshStandardMaterial({ color: "#d84c01", roughness: 0.3 });
-const eyeMat = new THREE.MeshBasicMaterial({ color: new THREE.Color(2, 2, 2), toneMapped: false, transparent: true });
-const heartMat = new THREE.MeshBasicMaterial({ color: "#d84c01", toneMapped: false });
-
-function RoofHat() {
+function ChatbotIcon({ size = 56, className }: { size?: number; className?: string }) {
   return (
-    <group position={[0, 0.3, 0]}>
-      <mesh rotation={[0, Math.PI / 4, 0]} material={roofMat}>
-        <coneGeometry args={[0.19, 0.15, 4]} />
-      </mesh>
-      <mesh position={[0, -0.075, 0]} rotation={[0, Math.PI / 4, 0]} material={roofTrimMat}>
-        <cylinderGeometry args={[0.195, 0.195, 0.014, 4]} />
-      </mesh>
-    </group>
-  );
-}
-
-function RobotEar({ position, isLeft }: { position: [number, number, number]; isLeft: boolean }) {
-  const dir = isLeft ? -1 : 1;
-  return (
-    <group position={position} scale={1.3}>
-      <mesh rotation={[0, 0, Math.PI / 2]} material={earBaseMat}>
-        <cylinderGeometry args={[0.04, 0.04, 0.025, 24]} />
-      </mesh>
-      <mesh position={[dir * 0.012, 0, 0]} rotation={[0, 0, Math.PI / 2]} material={earRingMat}>
-        <torusGeometry args={[0.032, 0.008, 12, 24]} />
-      </mesh>
-      <mesh position={[dir * 0.012, 0, 0]} rotation={[0, 0, Math.PI / 2]} material={earCenterMat}>
-        <cylinderGeometry args={[0.03, 0.03, 0.005, 24]} />
-      </mesh>
-      <group position={[dir * 0.015, 0.035, 0]} rotation={[-0.4, 0, 0]}>
-        <mesh position={[0, 0.01, 0]} material={antennaBaseMat}>
-          <cylinderGeometry args={[0.006, 0.008, 0.02, 12]} />
-        </mesh>
-        <mesh position={[0, 0.06, 0]} material={antennaStickMat}>
-          <cylinderGeometry args={[0.003, 0.003, 0.1, 6]} />
-        </mesh>
-        <mesh position={[0, 0.11, 0]} material={antennaTipMat}>
-          <sphereGeometry args={[0.006, 12, 12]} />
-        </mesh>
-      </group>
-    </group>
-  );
-}
-
-function RobotEyes({ isLovedRef }: { isLovedRef: React.MutableRefObject<boolean> }) {
-  const groupRef = useRef<THREE.Group>(null);
-  const normalRef = useRef<THREE.Group>(null);
-  const heartRef = useRef<THREE.Mesh>(null);
-
-  useFrame(({ clock }) => {
-    if (!groupRef.current || !normalRef.current || !heartRef.current) return;
-    const isHeart = isLovedRef.current;
-    normalRef.current.visible = !isHeart;
-    heartRef.current.visible = isHeart;
-    const cycle = clock.getElapsedTime() % 3.0;
-    const blinkDuration = 0.15;
-    let scaleY = 1;
-    if (cycle < blinkDuration && !isHeart) {
-      scaleY = Math.max(0.05, 1 - Math.sin((cycle / blinkDuration) * Math.PI));
-    }
-    groupRef.current.scale.set(1, scaleY, 1);
-  });
-
-  const eyeGeo = useMemo(() => {
-    const w = 0.025, h = 0.032, r = 0.018;
-    const shape = new THREE.Shape();
-    shape.moveTo(-w, -h);
-    shape.lineTo(-w, h - r);
-    shape.quadraticCurveTo(-w, h, -w + r, h);
-    shape.lineTo(w - r, h);
-    shape.quadraticCurveTo(w, h, w, h - r);
-    shape.lineTo(w, -h);
-    shape.lineTo(-w, -h);
-    return new THREE.ShapeGeometry(shape);
-  }, []);
-
-  return (
-    <group ref={groupRef} position={[0, -0.02, 0.29]} scale={1.1}>
-      <mesh ref={heartRef} visible={false} material={heartMat} position={[0, 0, 0]}>
-        <tubeGeometry args={[sharedHeartCurve, 48, 0.006, 6, true]} />
-      </mesh>
-      <group ref={normalRef}>
-        <mesh geometry={eyeGeo} material={eyeMat} position={[-0.07, 0, 0]} />
-        <mesh geometry={eyeGeo} material={eyeMat} position={[0.07, 0, 0]} />
-      </group>
-    </group>
-  );
-}
-
-function RobotAvatarModel() {
-  const rootRef = useRef<THREE.Group>(null);
-  const isLovedRef = useRef(false);
-
-  // Gentle idle sway instead of mouse-follow — this widget stays mounted on
-  // every page, so it shouldn't need pointer tracking to feel alive.
-  useFrame(({ clock }) => {
-    if (!rootRef.current) return;
-    const t = clock.getElapsedTime();
-    rootRef.current.rotation.y = Math.sin(t * 0.6) * 0.35;
-    rootRef.current.position.y = -0.28 + Math.sin(t * 1.4) * 0.02;
-  });
-
-  const handleClick = (e: import("@react-three/fiber").ThreeEvent<PointerEvent>) => {
-    e.stopPropagation();
-    isLovedRef.current = true;
-    setTimeout(() => (isLovedRef.current = false), 1500);
-  };
-
-  return (
-    <group ref={rootRef} position={[0, -0.28, 0]} onPointerDown={handleClick}>
-      {/* Flat chassis material, no procedural noise map — a texture tuned to read
-          as a subtle rough finish on the old full-size hero just aliases into
-          visible grain at this avatar's ~56px render size. */}
-      <mesh material={chassisMat}>
-        <sphereGeometry args={[0.43, 32, 32, 0, Math.PI * 2, Math.PI * 0.15, Math.PI * 0.85]} />
-      </mesh>
-      <mesh position={[0, 0.38, 0]} material={chassisMat}>
-        <cylinderGeometry args={[0.26, 0.28, 0.08, 32]} />
-      </mesh>
-      <group position={[0, 0.6, 0]}>
-        <mesh material={headMat}>
-          <sphereGeometry args={[0.28, 32, 32, 0, Math.PI * 2, 0, Math.PI]} />
-        </mesh>
-        <RoofHat />
-        <RobotEyes isLovedRef={isLovedRef} />
-        <RobotEar position={[-0.29, 0, 0]} isLeft={true} />
-        <RobotEar position={[0.29, 0, 0]} isLeft={false} />
-      </group>
-    </group>
-  );
-}
-
-function RobotAvatarCanvas({ size = 56 }: { size?: number }) {
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  // Same react-three-fiber canvas-sizing race hit in the old hero: react-use-measure's
-  // ResizeObserver can fire its first (correct) callback before r3f's own "mounted" guard
-  // flips, leaving the canvas stuck at the browser's 300x150 default. This effect runs
-  // after every descendant effect in the same commit — including react-use-measure's own
-  // mount effect — so by the time it dispatches 'resize', that guard has already flipped
-  // and the nudge lands instead of being discarded.
-  useEffect(() => {
-    let attempts = 0;
-    const id = setInterval(() => {
-      attempts++;
-      const canvas = containerRef.current?.querySelector("canvas");
-      const fixed = !!canvas && canvas.width > 0 && canvas.width !== 300 && canvas.height !== 150;
-      if (fixed || attempts >= 20) {
-        clearInterval(id);
-        return;
-      }
-      window.dispatchEvent(new Event("resize"));
-    }, 100);
-    return () => clearInterval(id);
-  }, []);
-
-  return (
-    <div ref={containerRef} style={{ width: size, height: size }}>
-      <Canvas camera={{ position: [0, 0.28, 1.55], fov: 32 }} gl={{ alpha: true, antialias: true }}>
-        <ambientLight intensity={1.1} />
-        <directionalLight position={[1, 2, 2]} intensity={0.6} />
-        <RobotAvatarModel />
-      </Canvas>
-    </div>
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 100 100"
+      className={className}
+      role="img"
+      aria-label="SmartDeal chatbot"
+    >
+      <defs>
+        <linearGradient id="botHeadGrad" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stopColor="#1f5c46" />
+          <stop offset="100%" stopColor="#0e3b2e" />
+        </linearGradient>
+      </defs>
+      <g
+        style={{ transformBox: "fill-box", transformOrigin: "50% 50%" }}
+        className="animate-[bot-breathe_4s_ease-in-out_infinite]"
+      >
+        <rect x="48.5" y="10" width="3" height="9" rx="1.5" fill="#d84c01" />
+        <circle cx="50" cy="7" r="3.4" fill="#d84c01" />
+        <path d="M 50 16 L 80 36 L 20 36 Z" fill="#d84c01" />
+        <rect x="15" y="32" width="70" height="60" rx="26" fill="url(#botHeadGrad)" />
+        <g
+          style={{ transformBox: "fill-box", transformOrigin: "50% 50%" }}
+          className="animate-[bot-blink_5.5s_ease-in-out_infinite]"
+        >
+          <rect x="33" y="56" width="11" height="17" rx="5.5" fill="#faf7f0" />
+          <rect x="56" y="56" width="11" height="17" rx="5.5" fill="#faf7f0" />
+        </g>
+      </g>
+    </svg>
   );
 }
 
@@ -329,8 +174,8 @@ export default function ChatbotWidget() {
       {open && (
         <div className="flex h-[28rem] w-[22rem] max-w-[calc(100vw-2.5rem)] flex-col overflow-hidden rounded-2xl border border-white/40 bg-white/85 shadow-2xl backdrop-blur-xl">
           <div className="flex items-center gap-3 bg-brand/95 px-4 py-3 text-white">
-            <div className="rounded-full bg-white/10">
-              <RobotAvatarCanvas size={40} />
+            <div className="rounded-full bg-white p-0.5">
+              <ChatbotIcon size={40} />
             </div>
             <div className="flex-1">
               <p className="text-sm font-bold">SmartDeal Assistant</p>
@@ -388,7 +233,7 @@ export default function ChatbotWidget() {
           <X className="h-6 w-6 text-brand" />
         ) : (
           <>
-            <RobotAvatarCanvas size={56} />
+            <ChatbotIcon size={56} />
             <span className="absolute -right-0.5 -top-0.5 h-3.5 w-3.5 rounded-full bg-green-500 ring-2 ring-white" />
           </>
         )}
