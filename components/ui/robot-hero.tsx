@@ -29,13 +29,19 @@ const sharedHeartCurve = new HeartCurve();
 function ResponsiveGroup({
   children,
   scale = 1,
+  liftUp = false,
 }: {
   children: React.ReactNode;
   scale?: number;
+  liftUp?: boolean;
 }) {
   const { viewport } = useThree();
   const s = Math.min(1.1, viewport.width / 3.5) * scale;
-  return <group scale={s}>{children}</group>;
+  // On phones/tablets the content card sits below the robot instead of beside
+  // it (see the layout comment near the JSX below), so shift the whole robot
+  // up to clear that space instead of having its lower body sit behind the card.
+  const y = liftUp ? 0.55 : 0;
+  return <group scale={s} position={[0, y, 0]}>{children}</group>;
 }
 
 function GlassCapsule({
@@ -721,6 +727,86 @@ function RobotPrototype({
   );
 }
 
+function getTimeGreeting(): string {
+  const hour = new Date().getHours();
+  if (hour >= 5 && hour < 12) return "Good Morning";
+  if (hour >= 12 && hour < 17) return "Good Afternoon";
+  return "Good Evening";
+}
+
+/**
+ * A plain-HTML (not Three.js) thought-bubble overlay near the robot's head,
+ * greeting visitors by time of day. Kept as a DOM element rather than in-canvas
+ * text/sprite for legible, crisp text at any zoom with none of the extra
+ * dependencies real text-in-WebGL would need. Positioned at a fixed point that
+ * lines up with the robot's default (centered, no mouse movement) pose — it
+ * won't chase the robot during desktop mouse-follow, which is an acceptable
+ * trade for staying simple.
+ */
+function GreetingCloud({ compact }: { compact: boolean }) {
+  const [greeting, setGreeting] = useState<string | null>(null);
+
+  useEffect(() => {
+    setGreeting(getTimeGreeting());
+    const id = setInterval(() => setGreeting(getTimeGreeting()), 60_000);
+    return () => clearInterval(id);
+  }, []);
+
+  if (!greeting) return null;
+
+  return (
+    <div
+      className={`pointer-events-none absolute z-30 animate-[fade-in-cloud_0.6s_ease-out_0.4s_both] ${
+        compact ? "left-1/2 top-[6%] -translate-x-1/2" : "left-[54%] top-[10%]"
+      }`}
+    >
+      <div className="relative">
+        {/* Puffs layered behind the main body to read as a cloud silhouette */}
+        <div className="absolute -left-3 top-2 h-7 w-7 rounded-full bg-white/95 shadow-sm" />
+        <div className="absolute -right-4 top-0 h-9 w-9 rounded-full bg-white/95 shadow-sm" />
+        <div className="absolute left-5 -top-3 h-8 w-8 rounded-full bg-white/95 shadow-sm" />
+        <div className="relative flex items-center gap-1.5 rounded-full bg-white/95 px-4 py-2.5 shadow-lg">
+          <span className="text-sm font-bold whitespace-nowrap text-[#01143c]">{greeting}!</span>
+          <span aria-hidden="true">👋</span>
+        </div>
+      </div>
+      {/* Thought-bubble tail: shrinking dots trailing down toward the robot's head */}
+      <div className="absolute left-[38%] top-full mt-1.5 h-3 w-3 rounded-full bg-white/90 shadow-sm" />
+      <div className="absolute left-[32%] top-full mt-6 h-2 w-2 rounded-full bg-white/85 shadow-sm" />
+      <div className="absolute left-[28%] top-full mt-9 h-1.5 w-1.5 rounded-full bg-white/80" />
+    </div>
+  );
+}
+
+/** Faint, abstract building silhouettes along the bottom edge — evokes a
+ * skyline without being literal renders, sitting behind the (transparent-bg)
+ * Canvas so it reads as atmospheric depth rather than competing with the robot. */
+function CitySkyline() {
+  const buildings = [
+    { x: 0, w: 70, h: 130 }, { x: 65, w: 45, h: 190 }, { x: 105, w: 60, h: 110 },
+    { x: 160, w: 50, h: 220 }, { x: 205, w: 75, h: 150 }, { x: 275, w: 40, h: 260 },
+    { x: 310, w: 65, h: 100 }, { x: 370, w: 55, h: 200 }, { x: 420, w: 80, h: 160 },
+    { x: 495, w: 45, h: 230 }, { x: 535, w: 70, h: 120 }, { x: 600, w: 50, h: 190 },
+    { x: 645, w: 90, h: 140 }, { x: 730, w: 40, h: 250 }, { x: 765, w: 65, h: 105 },
+    { x: 825, w: 55, h: 210 }, { x: 875, w: 75, h: 160 }, { x: 945, w: 45, h: 235 },
+    { x: 985, w: 70, h: 125 }, { x: 1050, w: 50, h: 195 }, { x: 1095, w: 85, h: 145 },
+    { x: 1175, w: 40, h: 255 }, { x: 1210, w: 65, h: 110 }, { x: 1270, w: 55, h: 205 },
+    { x: 1320, w: 75, h: 155 }, { x: 1390, w: 50, h: 230 },
+  ];
+  return (
+    <svg
+      className="pointer-events-none absolute inset-x-0 bottom-0 h-[40%] w-full"
+      viewBox="0 0 1440 300"
+      preserveAspectRatio="none"
+      aria-hidden="true"
+    >
+      {buildings.map((b, i) => (
+        <rect key={i} x={b.x} y={300 - b.h} width={b.w} height={b.h} fill="#01143c" opacity={0.07} />
+      ))}
+    </svg>
+  );
+}
+
 export interface NavItem {
   label: string;
   href: string;
@@ -913,6 +999,18 @@ export function RobotHero({
     };
   }, []);
 
+  // Below `lg`, the content card moves from "beside the robot" to "below it"
+  // (see the JSX layout further down) — this tracks that same breakpoint so
+  // the 3D robot and the greeting bubble know to reposition in step with it.
+  const [isCompact, setIsCompact] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 1023px)");
+    const update = () => setIsCompact(mq.matches);
+    update();
+    mq.addEventListener("change", update);
+    return () => mq.removeEventListener("change", update);
+  }, []);
+
   useEffect(() => {
     if (!canvasSize) return;
 
@@ -980,6 +1078,8 @@ export function RobotHero({
         </h1>
       </div>
 
+      <CitySkyline />
+
       <div className="absolute inset-0 z-10">
         {/* Deferred until the container's real size is measured — mounting
             Canvas (and its internal react-use-measure ResizeObserver) only
@@ -1014,7 +1114,7 @@ export function RobotHero({
 
           <Environment preset="studio" blur={0.5} />
 
-          <ResponsiveGroup scale={scale}>
+          <ResponsiveGroup scale={scale} liftUp={isCompact}>
             <ContactShadows
               position={[0, -0.79, 0]}
               opacity={entorno.sombraOpacidad}
@@ -1053,6 +1153,8 @@ export function RobotHero({
         )}
       </div>
 
+      <GreetingCloud compact={isCompact} />
+
       <div className="absolute inset-0 z-20 pointer-events-none flex flex-col">
         {showNavbar && (
           <AntennaNavbar
@@ -1065,13 +1167,20 @@ export function RobotHero({
           />
         )}
 
-        <div className="relative w-full max-w-[1400px] mx-auto px-8 flex-1 flex flex-col">
-          <div className="mt-auto flex flex-col gap-6 pb-12 w-full lg:flex-row lg:items-end lg:justify-between">
-            <div className="pointer-events-auto max-w-xl rounded-2xl bg-white/40 p-6 backdrop-blur-md">
+        {/* Below `lg` the robot renders roughly centered with no side room for
+            the card, so instead of overlaying it (which hid the robot
+            entirely on phones) the card is pushed down below the robot's
+            visible area via a viewport-height top margin, combined with
+            ResponsiveGroup's `liftUp` nudging the robot itself higher. At
+            `lg`+ there's enough width for both side by side, so it reverts
+            to the original bottom-anchored layout. */}
+        <div className="relative w-full max-w-[1400px] mx-auto px-6 sm:px-8 flex-1 flex flex-col">
+          <div className="mt-[44vh] sm:mt-[38vh] lg:mt-auto flex flex-col gap-6 pb-8 lg:pb-12 w-full lg:flex-row lg:items-end lg:justify-between">
+            <div className="pointer-events-auto max-w-xl rounded-2xl bg-white/75 lg:bg-white/40 p-5 sm:p-6 shadow-xl lg:shadow-none backdrop-blur-md">
               <p className="mb-2 text-xs font-bold uppercase tracking-wide text-[#d84c01]">
                 {eyebrow}
               </p>
-              <h2 className="text-3xl font-black leading-tight text-black sm:text-4xl">
+              <h2 className="text-2xl font-black leading-tight text-black sm:text-3xl lg:text-4xl">
                 {headline}
               </h2>
               <p className="mt-3 text-sm text-black/70 sm:text-base">
