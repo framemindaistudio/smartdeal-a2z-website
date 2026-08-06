@@ -5,10 +5,30 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  /* Sampled directly from the client's actual logo (SmartDeal A2Z logo.jpg) */
-  --brand: #01143c;
-  --brand-dark: #000a1f;
-  --brand-light: #0a2657;
+  /* Blended palette (2026-08-06): Arsenic / Black Coral / Dark Vanilla / Azureish
+     White (client-requested reference palette) for backgrounds, cards, and
+     neutrals, kept alongside the client's actual logo orange (#d84c01, used
+     directly via Tailwind's orange-* scale) as the one accent/CTA color that
+     still ties the site back to their real logo. --brand* replaces the logo's
+     navy for dark sections/buttons; the slate-* overrides below carry the same
+     palette through every existing neutral background/text/border. */
+  --brand: #363c46; /* Arsenic */
+  --brand-dark: #20232a;
+  --brand-light: #5d6472; /* Black Coral */
+  --vanilla: #cfb6a8; /* Dark Vanilla */
+
+  --slate-50: #e0eee9; /* Azureish White */
+  --slate-100: #d3e1dc;
+  --slate-200: #bfcdc9;
+  --slate-300: #a3b2b2;
+  --slate-400: #82909a;
+  --slate-500: #5d6472; /* Black Coral */
+  --slate-600: #4e5560;
+  --slate-700: #40454e;
+  --slate-800: #363c46; /* Arsenic */
+  --slate-900: #292d34;
+  --slate-950: #1c1f24;
+
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
@@ -51,6 +71,18 @@
   --color-brand: var(--brand);
   --color-brand-dark: var(--brand-dark);
   --color-brand-light: var(--brand-light);
+  --color-vanilla: var(--vanilla);
+  --color-slate-50: var(--slate-50);
+  --color-slate-100: var(--slate-100);
+  --color-slate-200: var(--slate-200);
+  --color-slate-300: var(--slate-300);
+  --color-slate-400: var(--slate-400);
+  --color-slate-500: var(--slate-500);
+  --color-slate-600: var(--slate-600);
+  --color-slate-700: var(--slate-700);
+  --color-slate-800: var(--slate-800);
+  --color-slate-900: var(--slate-900);
+  --color-slate-950: var(--slate-950);
   --font-heading: var(--font-sans);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);

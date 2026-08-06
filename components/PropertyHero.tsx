@@ -86,7 +86,7 @@ export default function PropertyHero() {
       {/* Background: gradient depth + soft glow blobs + skyline + faint grid */}
       <div
         className="pointer-events-none absolute inset-0"
-        style={{ background: "radial-gradient(120% 100% at 50% -10%, #0a2657 0%, #01143c 55%, #000a1f 100%)" }}
+        style={{ background: "radial-gradient(120% 100% at 50% -10%, #5d6472 0%, #363c46 55%, #20232a 100%)" }}
       />
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
         <div className="absolute -left-32 -top-32 h-96 w-96 rounded-full bg-orange-600/20 blur-3xl animate-[aurora-drift_20s_ease-in-out_infinite]" />

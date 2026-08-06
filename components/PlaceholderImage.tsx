@@ -8,7 +8,7 @@ import { ImageIcon } from "lucide-react";
 const VARIANTS = {
   brand: "from-slate-800 to-slate-950 text-slate-400",
   accent: "from-orange-100 to-orange-200 text-orange-700",
-  neutral: "from-slate-100 to-slate-200 text-slate-400",
+  neutral: "from-vanilla/25 to-vanilla/70 text-brand-light",
 } as const;
 
 export default function PlaceholderImage({
