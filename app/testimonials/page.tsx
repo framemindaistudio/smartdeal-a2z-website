@@ -1,20 +1,37 @@
 import type { Metadata } from "next";
-import { Star } from "lucide-react";
 import PageHero from "@/components/PageHero";
-import PlaceholderImage from "@/components/PlaceholderImage";
+import { CoverflowCarousel, type CoverflowSlide } from "@/components/ui/coverflow-carousel";
 
 export const metadata: Metadata = {
   title: "Testimonials",
   description: "What our clients say.",
 };
 
-// Placeholder quotes — replace with real client testimonials once submitted
-// via the onboarding portal's "Testimonials" section.
-const TESTIMONIALS = [
-  { name: "Client Name", role: "Homebuyer", quote: "[Placeholder testimonial] — replace with a real client quote once submitted." },
-  { name: "Client Name", role: "Property Seller", quote: "[Placeholder testimonial] — replace with a real client quote once submitted." },
-  { name: "Client Name", role: "Investor", quote: "[Placeholder testimonial] — replace with a real client quote once submitted." },
+// Placeholder testimonials — replace with real client quotes once submitted
+// via the onboarding portal's "Testimonials" section. Avatars are generated
+// (not stock photos) so nothing here is ever mistaken for a real client.
+const AVATAR_COLORS = ["#0e3b2e", "#1f5c46", "#d84c01", "#7d7a65"];
+
+function avatarUri(color: string) {
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><rect width="200" height="200" fill="${color}"/><text x="100" y="138" font-family="Georgia, 'Times New Roman', serif" font-size="130" fill="#ffffff" fill-opacity="0.85" text-anchor="middle">&#8220;</text></svg>`;
+  return `data:image/svg+xml,${encodeURIComponent(svg)}`;
+}
+
+const ROLES = [
+  "Homebuyer",
+  "Property Seller",
+  "Investor",
+  "Tenant",
+  "Landlord",
+  "Commercial Buyer",
 ];
+
+const TESTIMONIALS: CoverflowSlide[] = ROLES.map((role, i) => ({
+  src: avatarUri(AVATAR_COLORS[i % AVATAR_COLORS.length]),
+  alt: "Placeholder avatar",
+  title: `“[Placeholder testimonial ${i + 1}] — replace with a real client quote once submitted.”`,
+  subtitle: `Client ${i + 1} · ${role}`,
+}));
 
 export default function TestimonialsPage() {
   return (
@@ -24,26 +41,14 @@ export default function TestimonialsPage() {
         description="Placeholder quotes shown below — real testimonials are pending from the client."
       />
 
-      <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:px-8">
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {TESTIMONIALS.map((t, i) => (
-            <div key={i} className="flex flex-col rounded-xl border border-slate-200 bg-white p-6">
-              <div className="mb-3 flex gap-0.5 text-orange-500">
-                {Array.from({ length: 5 }).map((_, idx) => (
-                  <Star key={idx} className="h-4 w-4" fill="currentColor" />
-                ))}
-              </div>
-              <p className="flex-1 text-sm italic text-slate-600">&ldquo;{t.quote}&rdquo;</p>
-              <div className="mt-5 flex items-center gap-3">
-                <PlaceholderImage label="Photo" variant="neutral" aspect="aspect-square" className="w-12 shrink-0 rounded-full" />
-                <div>
-                  <p className="text-sm font-semibold text-slate-900">{t.name}</p>
-                  <p className="text-xs text-slate-500">{t.role}</p>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
+      <section className="mx-auto max-w-6xl px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
+        <CoverflowCarousel
+          slides={TESTIMONIALS}
+          showCaption
+          showPagination
+          showNavigation
+          label="Client testimonials"
+        />
       </section>
     </div>
   );

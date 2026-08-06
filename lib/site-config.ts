@@ -38,12 +38,12 @@ export const NAV_LINKS = [
   { href: "/about", label: "About Us" },
   { href: "/services", label: "Services" },
   { href: "/gallery", label: "Gallery" },
+  { href: "/testimonials", label: "Testimonials" },
   { href: "/contact", label: "Contact" },
 ] as const;
 
 export const FOOTER_LINKS = [
   { href: "/faq", label: "FAQ" },
-  { href: "/testimonials", label: "Testimonials" },
   { href: "/featured", label: "Featured Properties" },
   { href: "/privacy-policy", label: "Privacy Policy" },
   { href: "/terms-conditions", label: "Terms & Conditions" },
