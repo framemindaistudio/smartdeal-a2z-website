@@ -83,38 +83,26 @@ export default function PropertyHero() {
 
   return (
     <section className="relative overflow-hidden bg-brand">
-      {/* Background: gradient depth + soft glow blobs + skyline + faint grid */}
+      {/* Background: kept to just gradient depth + a faint skyline — minimal on purpose. */}
       <div
         className="pointer-events-none absolute inset-0"
-        style={{ background: "radial-gradient(120% 100% at 50% -10%, #5d6472 0%, #363c46 55%, #20232a 100%)" }}
-      />
-      <div className="pointer-events-none absolute inset-0 overflow-hidden">
-        <div className="absolute -left-32 -top-32 h-96 w-96 rounded-full bg-orange-600/20 blur-3xl animate-[aurora-drift_20s_ease-in-out_infinite]" />
-        <div className="absolute -right-24 top-1/3 h-[26rem] w-[26rem] rounded-full bg-blue-500/10 blur-3xl animate-[aurora-drift_24s_ease-in-out_infinite_reverse]" />
-      </div>
-      <div
-        className="pointer-events-none absolute inset-0 opacity-[0.05]"
-        style={{
-          backgroundImage:
-            "linear-gradient(to right, white 1px, transparent 1px), linear-gradient(to bottom, white 1px, transparent 1px)",
-          backgroundSize: "44px 44px",
-        }}
+        style={{ background: "radial-gradient(120% 100% at 50% -10%, #1f5c46 0%, #0e3b2e 55%, #082720 100%)" }}
       />
       <CitySkylineBg />
 
-      <div className="relative mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-28">
+      <div className="relative mx-auto max-w-6xl px-4 py-24 sm:px-6 sm:py-28 lg:px-8 lg:py-36">
         <div className="mx-auto max-w-2xl animate-[fade-up_0.7s_ease-out] text-center">
-          <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-xs font-medium text-orange-300 backdrop-blur-sm">
+          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-xs font-medium text-orange-300 backdrop-blur-sm">
             <span className="h-1.5 w-1.5 rounded-full bg-orange-400 animate-pulse" />
             {SITE_CONFIG.name} · Property Platform
           </div>
-          <h1 className="text-3xl font-black leading-[1.15] tracking-tight text-white sm:text-4xl lg:text-5xl">
+          <h1 className="text-4xl font-semibold leading-[1.15] tracking-tight text-white sm:text-5xl lg:text-6xl">
             SmartDeal A2Z{" "}
             <span className="bg-gradient-to-r from-orange-400 via-orange-300 to-amber-200 bg-clip-text text-transparent">
               One Platform for All Real Estate Needs
             </span>
           </h1>
-          <p className="mt-4 text-sm text-slate-300 sm:text-base">
+          <p className="mx-auto mt-6 max-w-lg text-sm text-slate-300 sm:text-base">
             Buy, Sell, Rent, Lease, Invest, and Discover Residential, Commercial, Land, Hotels, and More —
             all on one secure and smart platform.
           </p>
@@ -123,7 +111,7 @@ export default function PropertyHero() {
         {/* Search widget */}
         <form
           onSubmit={handleSearch}
-          className="mx-auto mt-10 max-w-4xl overflow-hidden rounded-2xl border border-white/20 bg-white/10 shadow-2xl backdrop-blur-xl"
+          className="mx-auto mt-12 max-w-4xl overflow-hidden rounded-2xl border border-white/20 bg-white/10 shadow-2xl backdrop-blur-xl"
         >
           <div className="flex border-b border-white/10">
             {(["For Sale", "For Rent"] as const).map((p) => (
@@ -203,7 +191,7 @@ export default function PropertyHero() {
         </form>
 
         {/* Trust stats */}
-        <div className="mx-auto mt-10 flex max-w-3xl flex-wrap items-center justify-center gap-x-10 gap-y-5">
+        <div className="mx-auto mt-14 flex max-w-3xl flex-wrap items-center justify-center gap-x-12 gap-y-6">
           {TRUST_STATS.map(({ icon: Icon, value, label }) => (
             <div key={label} className="flex items-center gap-3">
               <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white/10 text-orange-400">

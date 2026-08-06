@@ -52,7 +52,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:px-8">
+      <section className="mx-auto max-w-6xl px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
         <SectionHeading
           eyebrow="Handpicked"
           title="Featured Properties"
@@ -73,7 +73,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="bg-slate-50 py-16">
+      <section className="bg-slate-50 py-20 lg:py-28">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <SectionHeading title="Why Choose SmartDeal" align="center" />
           <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
@@ -90,7 +90,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:px-8">
+      <section className="mx-auto max-w-6xl px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
         <div className="flex flex-col items-center justify-between gap-6 rounded-2xl bg-brand px-8 py-12 text-center text-white sm:flex-row sm:text-left">
           <div>
             <h2 className="text-2xl font-bold">Looking to sell instead?</h2>
