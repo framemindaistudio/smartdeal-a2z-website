@@ -104,7 +104,7 @@ export default function PropertyHero() {
           </h1>
           <p className="mx-auto mt-6 max-w-lg text-sm text-slate-300 sm:text-base">
             Buy, Sell, Rent, Lease, Invest, and Discover Residential, Commercial, Land, Hotels, and More —
-            all on one secure and smart platform.
+            all on <strong className="text-base font-bold text-white sm:text-lg">one secure and smart platform</strong>.
           </p>
         </div>
 

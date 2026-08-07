@@ -10,10 +10,12 @@ export const metadata: Metadata = {
 
 // Placeholder Q&A — reasonable defaults for a property browse/enquiry platform.
 // Review and replace with the client's actual FAQ content from onboarding.
+const EMPHASIS = "text-base font-bold text-slate-900";
+
 const FAQS = [
   {
     q: "Is there a fee to enquire about a property?",
-    a: "No. Browsing and sending an enquiry through the website is completely free.",
+    a: <>No. Browsing and sending an enquiry through the website is <strong className={EMPHASIS}>completely free</strong>.</>,
   },
   {
     q: "Are the property listings verified?",
@@ -21,7 +23,7 @@ const FAQS = [
   },
   {
     q: `How do I list my property with ${SITE_CONFIG.shortName}?`,
-    a: 'Visit the "Sell Property" page and submit your property details through the form. Our team will follow up with next steps.',
+    a: <>Visit the &ldquo;Sell Property&rdquo; page and submit your property details through the form. <strong className={EMPHASIS}>Our team will follow up</strong> with next steps.</>,
   },
   {
     q: "How quickly will I get a response to my enquiry?",

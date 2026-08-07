@@ -7,31 +7,58 @@ import { getFeaturedProperties, PROPERTY_TYPES } from "@/lib/properties";
 
 // "Why Choose SmartDeal" — verbatim from the client's Homepage Content
 // onboarding section (filled in 2026-08-06), icons assigned by us.
+const EMPHASIS = "text-base font-bold text-slate-900";
+
 const WHY_US = [
   {
     icon: ShieldCheck,
     title: "Verified Properties",
-    text: "Every listing is carefully verified for authenticity and transparency.",
+    text: (
+      <>
+        Every listing is <strong className={EMPHASIS}>carefully verified</strong> for authenticity and
+        transparency.
+      </>
+    ),
   },
   {
     icon: Handshake,
     title: "Trusted Builders & Developers",
-    text: "Partner with reliable builders, developers, and property owners.",
+    text: (
+      <>
+        Partner with <strong className={EMPHASIS}>reliable builders, developers</strong>, and property
+        owners.
+      </>
+    ),
   },
   {
     icon: LifeBuoy,
     title: "End-to-End Assistance",
-    text: "Complete support from property search and site visits to documentation and deal closure.",
+    text: (
+      <>
+        <strong className={EMPHASIS}>Complete support</strong> from property search and site visits to
+        documentation and deal closure.
+      </>
+    ),
   },
   {
     icon: BadgePercent,
     title: "Best Deals & Fair Pricing",
-    text: "Competitive prices with expert guidance to help you make the right investment.",
+    text: (
+      <>
+        <strong className={EMPHASIS}>Competitive prices</strong> with expert guidance to help you make the
+        right investment.
+      </>
+    ),
   },
   {
     icon: Lock,
     title: "Secure & Transparent Process",
-    text: "Honest communication, clear documentation, and a hassle-free buying and selling experience.",
+    text: (
+      <>
+        Honest communication, clear documentation, and a{" "}
+        <strong className={EMPHASIS}>hassle-free buying and selling experience</strong>.
+      </>
+    ),
   },
 ];
 

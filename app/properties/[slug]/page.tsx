@@ -12,6 +12,20 @@ export function generateStaticParams() {
   return PROPERTIES.map((p) => ({ slug: p.slug }));
 }
 
+/** Bolds the first occurrence of `highlight` within `text`, if given. */
+function HighlightedText({ text, highlight }: { text: string; highlight?: string }) {
+  if (!highlight) return <>{text}</>;
+  const index = text.indexOf(highlight);
+  if (index === -1) return <>{text}</>;
+  return (
+    <>
+      {text.slice(0, index)}
+      <strong className="text-lg font-bold text-slate-900">{highlight}</strong>
+      {text.slice(index + highlight.length)}
+    </>
+  );
+}
+
 export async function generateMetadata(props: PageProps<"/properties/[slug]">): Promise<Metadata> {
   const { slug } = await props.params;
   const property = getPropertyBySlug(slug);
@@ -78,7 +92,9 @@ export default async function PropertyDetailsPage(props: PageProps<"/properties/
 
           <div className="mb-8">
             <h2 className="mb-3 text-lg font-semibold text-slate-900">Description</h2>
-            <p className="leading-relaxed text-slate-600">{property.description}</p>
+            <p className="leading-relaxed text-slate-600">
+              <HighlightedText text={property.description} highlight={property.descriptionHighlight} />
+            </p>
           </div>
 
           <div className="mb-8">

@@ -9,21 +9,23 @@ export const metadata: Metadata = {
   description: "List your property with SmartDeal A2Z and reach genuine buyers.",
 };
 
+const EMPHASIS = "text-base font-bold text-slate-900";
+
 const STEPS = [
   {
     icon: ClipboardList,
     title: "Share Your Details",
-    text: "Tell us about your property — type, location, size and expected price.",
+    text: <>Tell us about your property — type, location, size and <strong className={EMPHASIS}>expected price</strong>.</>,
   },
   {
     icon: Users,
     title: "We List It",
-    text: "Our team prepares your listing and adds it to the platform for buyers to discover.",
+    text: <>Our team prepares your listing and adds it to the platform for <strong className={EMPHASIS}>buyers to discover</strong>.</>,
   },
   {
     icon: Handshake,
     title: "We Connect You",
-    text: "Interested buyers reach out through us — you handle the conversation directly.",
+    text: <>Interested buyers reach out through us — <strong className={EMPHASIS}>you handle the conversation directly</strong>.</>,
   },
 ];
 
@@ -32,7 +34,14 @@ export default function SellPage() {
     <div>
       <PageHero
         title="Sell Your Property"
-        description="Reach genuine, actively-searching buyers. Tell us about your property below and our team will take it from there."
+        description={
+          <>
+            <strong className="text-lg font-bold text-white">
+              Reach genuine, actively-searching buyers.
+            </strong>{" "}
+            Tell us about your property below and our team will take it from there.
+          </>
+        }
       />
 
       <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:px-8">

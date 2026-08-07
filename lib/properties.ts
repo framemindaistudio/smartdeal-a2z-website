@@ -18,6 +18,8 @@ export interface Property {
   featured: boolean;
   summary: string;
   description: string;
+  /** Exact substring of `description` to bold on the property detail page. */
+  descriptionHighlight?: string;
   highlights: string[];
   amenities: string[];
   nearbyFacilities: string[];
@@ -40,6 +42,7 @@ export const PROPERTIES: Property[] = [
     summary: "Modern 3BHK with balcony views, close to metro and tech parks.",
     description:
       "A well-ventilated 3BHK on a mid floor with an open kitchen, two balconies and covered parking. Walking distance to the metro station, cafes and reputed schools — a strong fit for families or professionals wanting a low commute.",
+    descriptionHighlight: "Walking distance to the metro station",
     highlights: ["Mid floor, east facing", "2 covered car parks", "Clubhouse & gym access", "Ready to move in"],
     amenities: ["24x7 security", "Power backup", "Lift", "Clubhouse", "Children's play area", "Gym"],
     nearbyFacilities: ["Metro station – 0.6 km", "International school – 1.2 km", "Hospital – 2 km", "Mall – 1.8 km"],
@@ -60,6 +63,7 @@ export const PROPERTIES: Property[] = [
     summary: "Gated-community villa with private garden and 3-car driveway.",
     description:
       "A spacious 4BHK independent villa inside a gated community, with a private front garden, double-height living room and a dedicated home office space. Community amenities include a clubhouse, pool and jogging track.",
+    descriptionHighlight: "gated community",
     highlights: ["Private garden", "Double-height living room", "3-car driveway", "Home office nook"],
     amenities: ["Gated community", "Swimming pool", "Clubhouse", "Jogging track", "24x7 security", "Power backup"],
     nearbyFacilities: ["Tech park – 3 km", "International school – 2.5 km", "Hospital – 4 km"],
@@ -80,6 +84,7 @@ export const PROPERTIES: Property[] = [
     summary: "Semi-furnished 2BHK, ideal for small families or working couples.",
     description:
       "A bright, semi-furnished 2BHK on a high floor with society amenities and easy access to Kothrud's main market and IT corridor. Modular kitchen and wardrobes included.",
+    descriptionHighlight: "bright, semi-furnished 2BHK",
     highlights: ["Semi-furnished", "High floor, good ventilation", "Modular kitchen", "1 covered parking"],
     amenities: ["Lift", "Power backup", "Security", "Visitor parking"],
     nearbyFacilities: ["Bus depot – 0.4 km", "Market – 0.8 km", "Hospital – 1.5 km"],
@@ -100,6 +105,7 @@ export const PROPERTIES: Property[] = [
     summary: "DTCP-approved residential plot, clear title, ready for construction.",
     description:
       "A rectangular, DTCP-approved residential plot in a developing sector with wide approach roads and all underground utilities laid. Clear title and immediately available for construction.",
+    descriptionHighlight: "Clear title",
     highlights: ["DTCP approved", "Clear title", "Wide 40 ft approach road", "Corner plot"],
     amenities: ["Underground drainage", "Electricity connection point", "Boundary wall"],
     nearbyFacilities: ["Highway access – 1 km", "School – 2 km"],
@@ -120,6 +126,7 @@ export const PROPERTIES: Property[] = [
     summary: "Duplex penthouse with private terrace and skyline views.",
     description:
       "A duplex penthouse spanning the top two floors with a private terrace garden, home theatre room and staff quarters. Premium fittings throughout and panoramic city views from every bedroom.",
+    descriptionHighlight: "panoramic city views",
     highlights: ["Duplex layout", "Private terrace", "Home theatre room", "Staff quarters"],
     amenities: ["Private lift lobby", "Infinity pool access", "Concierge desk", "Power backup", "4 covered car parks"],
     nearbyFacilities: ["Business district – 2 km", "Premium school – 1.5 km", "Hospital – 2.2 km"],
@@ -140,6 +147,7 @@ export const PROPERTIES: Property[] = [
     summary: "Weekend-home style cottage, 10 minutes from the beach.",
     description:
       "A single-storey independent house with a sit-out porch, small orchard and space for a plunge pool. Popular with buyers looking for a weekend home within driving distance of Mumbai.",
+    descriptionHighlight: "weekend home",
     highlights: ["10 min from beach", "Sit-out porch", "Small orchard", "Space for plunge pool"],
     amenities: ["Borewell + municipal water", "Solar water heater", "Boundary wall", "Covered parking"],
     nearbyFacilities: ["Beach – 4 km", "Local market – 2 km"],
@@ -160,6 +168,7 @@ export const PROPERTIES: Property[] = [
     summary: "Grade-A office shell, ready for fit-out, in the IT corridor.",
     description:
       "A bare-shell commercial unit on a mid floor of a Grade-A office tower, suitable for a 30–40 seat setup. Building offers backup power, dedicated fire safety systems and ample visitor parking.",
+    descriptionHighlight: "Grade-A office tower",
     highlights: ["Grade-A building", "30–40 seat capacity", "Bare shell — customizable fit-out", "24x7 access"],
     amenities: ["Power backup", "Fire safety systems", "Visitor parking", "Cafeteria in building"],
     nearbyFacilities: ["IT corridor", "Metro station – 1 km", "Food court – 0.3 km"],
@@ -180,6 +189,7 @@ export const PROPERTIES: Property[] = [
     summary: "Compact, budget-friendly 1BHK — a strong first-home or rental-yield option.",
     description:
       "A compact and efficiently laid out 1BHK in a well-maintained society, close to the IT hub. Good natural light and a functional kitchen layout make this a popular choice for first-time buyers and investors alike.",
+    descriptionHighlight: "popular choice for first-time buyers and investors",
     highlights: ["Budget-friendly", "Good rental yield potential", "Well-maintained society", "Close to IT hub"],
     amenities: ["Lift", "Security", "Power backup", "Children's play area"],
     nearbyFacilities: ["IT park – 1.5 km", "Bus stop – 0.2 km", "Supermarket – 0.5 km"],

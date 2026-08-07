@@ -1,9 +1,11 @@
+import type { ReactNode } from "react";
+
 export default function PageHero({
   title,
   description,
 }: {
   title: string;
-  description?: string;
+  description?: ReactNode;
 }) {
   return (
     <section className="bg-brand py-16 text-white sm:py-20">

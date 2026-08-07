@@ -12,14 +12,16 @@ export const metadata: Metadata = {
 // mixes actual services with property types handled — split here into service
 // cards (below) plus a "property types we cover" strip (rendered further down),
 // so nothing from their list is dropped without becoming a redundant card.
+const EMPHASIS = "text-base font-bold text-slate-900";
+
 const SERVICES = [
-  { icon: Home, title: "Property Buying Assistance", text: "Guidance and support finding the right property for your budget and needs." },
-  { icon: Key, title: "Property Selling Assistance", text: "List your property and get connected with genuinely interested buyers." },
-  { icon: DoorOpen, title: "Rental Services", text: "Find or list rental properties across residential and commercial spaces." },
-  { icon: TrendingUp, title: "Investment Advisory", text: "Expert guidance on real estate investment opportunities." },
-  { icon: Users, title: "Property Consultation", text: "One-on-one consultation to help you make the right property decision." },
-  { icon: Scale, title: "Legal Assistance", text: "Support with property-related legal documentation and due diligence." },
-  { icon: Landmark, title: "Loan Assistance", text: "Guidance connecting you with home loan and financing options." },
+  { icon: Home, title: "Property Buying Assistance", text: <>Guidance and support finding the <strong className={EMPHASIS}>right property</strong> for your budget and needs.</> },
+  { icon: Key, title: "Property Selling Assistance", text: <>List your property and get connected with <strong className={EMPHASIS}>genuinely interested buyers</strong>.</> },
+  { icon: DoorOpen, title: "Rental Services", text: <>Find or list rental properties across <strong className={EMPHASIS}>residential and commercial</strong> spaces.</> },
+  { icon: TrendingUp, title: "Investment Advisory", text: <><strong className={EMPHASIS}>Expert guidance</strong> on real estate investment opportunities.</> },
+  { icon: Users, title: "Property Consultation", text: <>One-on-one consultation to help you make the <strong className={EMPHASIS}>right property decision</strong>.</> },
+  { icon: Scale, title: "Legal Assistance", text: <>Support with property-related legal documentation and <strong className={EMPHASIS}>due diligence</strong>.</> },
+  { icon: Landmark, title: "Loan Assistance", text: <>Guidance connecting you with <strong className={EMPHASIS}>home loan and financing</strong> options.</> },
 ];
 
 const PROPERTY_TYPES_SERVED = ["Residential", "Commercial", "Villa", "Apartment", "Plots", "Land", "Farm Land"];

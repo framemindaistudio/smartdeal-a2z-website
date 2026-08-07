@@ -19,8 +19,11 @@ export default function BuyPage() {
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <h1 className="text-3xl font-bold sm:text-4xl">Buy a Property</h1>
           <p className="mt-3 max-w-2xl text-slate-300">
-            Search our full inventory of homes, apartments, villas and plots — or start
-            with a quick search below.
+            Search our{" "}
+            <strong className="text-lg font-bold text-white">
+              full inventory of homes, apartments, villas and plots
+            </strong>{" "}
+            — or start with a quick search below.
           </p>
           <div className="mt-8 max-w-3xl">
             <QuickSearch purpose="For Sale" />
@@ -54,9 +57,9 @@ export default function BuyPage() {
           <SectionHeading title="How Buying Works" align="center" />
           <div className="grid gap-8 sm:grid-cols-3">
             {[
-              { step: "1", title: "Search & Shortlist", text: "Use filters to find properties matching your budget and needs." },
-              { step: "2", title: "Enquire", text: "Send an enquiry via the contact form, call or WhatsApp — directly, no middlemen." },
-              { step: "3", title: "Connect & Visit", text: "Our team gets back to you to arrange details and a site visit." },
+              { step: "1", title: "Search & Shortlist", text: <>Use filters to find properties matching <strong className="text-base font-bold text-slate-900">your budget and needs</strong>.</> },
+              { step: "2", title: "Enquire", text: <>Send an enquiry via the contact form, call or WhatsApp — <strong className="text-base font-bold text-slate-900">directly, no middlemen</strong>.</> },
+              { step: "3", title: "Connect & Visit", text: <>Our team gets back to you to arrange details and a <strong className="text-base font-bold text-slate-900">site visit</strong>.</> },
             ].map((s) => (
               <div key={s.step} className="text-center">
                 <div className="mx-auto mb-4 flex h-10 w-10 items-center justify-center rounded-full bg-brand text-sm font-bold text-white">

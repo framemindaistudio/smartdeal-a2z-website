@@ -15,22 +15,47 @@ export const metadata: Metadata = {
   description: `Learn more about ${SITE_CONFIG.name}.`,
 };
 
+// VALUES card text is text-sm ambient, so one step up is text-base. The two intro
+// paragraphs below have no explicit size (default text-base), so their emphasis
+// needs text-lg instead — same class, matched to the paragraph it actually sits in.
+const EMPHASIS = "text-base font-bold text-slate-900";
+const EMPHASIS_LG = "text-lg font-bold text-slate-900";
+
 // Verbatim from the client's Company Information onboarding section (2026-08-06).
 const VALUES = [
   {
     icon: Target,
     title: "Our Mission",
-    text: "Our mission is to simplify property transactions by using smart technology, verified information, and secure digital processes that create confidence for every customer.",
+    text: (
+      <>
+        Our mission is to simplify property transactions by using smart technology, verified
+        information, and secure digital processes that{" "}
+        <strong className={EMPHASIS}>create confidence for every customer</strong>.
+      </>
+    ),
   },
   {
     icon: Eye,
     title: "Our Vision",
-    text: "To become India's most trusted and innovative A2Z Real Estate Operating System, empowering millions of people to buy, sell, rent, invest, and grow through one intelligent platform.",
+    text: (
+      <>
+        To become{" "}
+        <strong className={EMPHASIS}>India&apos;s most trusted and innovative A2Z Real Estate Operating System</strong>,
+        empowering millions of people to buy, sell, rent, invest, and grow through one intelligent
+        platform.
+      </>
+    ),
   },
   {
     icon: HeartHandshake,
     title: "Why SmartDeal",
-    text: "SmartDeal is not just a real estate platform but a complete property ecosystem where Buyer, Seller, Builder, Developer, Broker and Investor connect on a single secure platform.",
+    text: (
+      <>
+        SmartDeal is not just a real estate platform but a{" "}
+        <strong className={EMPHASIS}>complete property ecosystem</strong> where Buyer, Seller,
+        Builder, Developer, Broker and Investor connect on a single secure platform.
+      </>
+    ),
   },
 ];
 
@@ -56,17 +81,20 @@ export default function AboutPage() {
             <SectionHeading eyebrow="Who We Are" title={`About ${SITE_CONFIG.name}`} />
             <p className="text-slate-600">
               SmartDeal A2Z Real Estate Platform is a next-generation PropTech company dedicated to
-              transforming the real estate industry through technology, transparency, and trust. Our
-              platform connects buyers, sellers, builders, developers, brokers, investors, landlords, and
-              service providers on a single digital ecosystem, making every property transaction faster,
-              safer, and more efficient.
+              transforming the real estate industry through{" "}
+              <strong className={EMPHASIS_LG}>technology, transparency, and trust</strong>. Our platform
+              connects buyers, sellers, builders, developers, brokers, investors, landlords, and service
+              providers on a single digital ecosystem, making every property transaction faster, safer,
+              and more efficient.
             </p>
             <p className="mt-4 text-slate-600">
               From residential, commercial, plots, farmland, hotels, rentals, and investment opportunities
               to lead management, CRM, digital documentation, marketing, and business analytics, SmartDeal
-              A2Z provides complete end-to-end real estate solutions. Backed by {SITE_CONFIG.yearsInBusiness}{" "}
-              years of business experience, SmartDeal A2Z delivers a trusted, transparent, and
-              technology-driven real estate platform for buyers, sellers, developers, and channel partners.
+              A2Z provides{" "}
+              <strong className={EMPHASIS_LG}>complete end-to-end real estate solutions</strong>. Backed by{" "}
+              {SITE_CONFIG.yearsInBusiness} years of business experience, SmartDeal A2Z delivers a
+              trusted, transparent, and technology-driven real estate platform for buyers, sellers,
+              developers, and channel partners.
             </p>
           </div>
         </div>

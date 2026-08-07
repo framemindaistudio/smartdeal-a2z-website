@@ -19,8 +19,11 @@ export default function RentPage() {
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <h1 className="text-3xl font-bold sm:text-4xl">Rent a Property</h1>
           <p className="mt-3 max-w-2xl text-slate-300">
-            Find verified rental homes, apartments and commercial spaces — or start with a
-            quick search below.
+            Find{" "}
+            <strong className="text-lg font-bold text-white">
+              verified rental homes, apartments and commercial spaces
+            </strong>{" "}
+            — or start with a quick search below.
           </p>
           <div className="mt-8 max-w-3xl">
             <QuickSearch purpose="For Rent" />
@@ -60,9 +63,9 @@ export default function RentPage() {
           <SectionHeading title="How Renting Works" align="center" />
           <div className="grid gap-8 sm:grid-cols-3">
             {[
-              { step: "1", title: "Search & Shortlist", text: "Use filters to find rentals matching your budget, location and move-in needs." },
-              { step: "2", title: "Enquire", text: "Send an enquiry via the contact form, call or WhatsApp — directly, no middlemen." },
-              { step: "3", title: "Connect & Move In", text: "Our team gets back to you to arrange details, a viewing and the lease." },
+              { step: "1", title: "Search & Shortlist", text: <>Use filters to find rentals matching <strong className="text-base font-bold text-slate-900">your budget, location and move-in needs</strong>.</> },
+              { step: "2", title: "Enquire", text: <>Send an enquiry via the contact form, call or WhatsApp — <strong className="text-base font-bold text-slate-900">directly, no middlemen</strong>.</> },
+              { step: "3", title: "Connect & Move In", text: <>Our team gets back to you to arrange details, a viewing and <strong className="text-base font-bold text-slate-900">the lease</strong>.</> },
             ].map((s) => (
               <div key={s.step} className="text-center">
                 <div className="mx-auto mb-4 flex h-10 w-10 items-center justify-center rounded-full bg-brand text-sm font-bold text-white">
