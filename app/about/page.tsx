@@ -1,9 +1,14 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { Target, Eye, HeartHandshake } from "lucide-react";
 import PageHero from "@/components/PageHero";
 import SectionHeading from "@/components/SectionHeading";
 import PlaceholderImage from "@/components/PlaceholderImage";
 import { SITE_CONFIG } from "@/lib/site-config";
+
+const FOUNDERS = [
+  { name: "Rajesh Dattani", role: "Founder", photo: "/team/rajesh-dattani.png" },
+];
 
 export const metadata: Metadata = {
   title: "About Us",
@@ -64,6 +69,23 @@ export default function AboutPage() {
               technology-driven real estate platform for buyers, sellers, developers, and channel partners.
             </p>
           </div>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:px-8">
+        <SectionHeading eyebrow="Leadership" title="Founder" align="center" />
+        <div className="flex flex-wrap justify-center gap-8">
+          {FOUNDERS.map((f) => (
+            <div key={f.name} className="w-56 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+              <div className="relative aspect-[3/4] w-full">
+                <Image src={f.photo} alt={f.name} fill sizes="224px" className="object-cover" />
+              </div>
+              <div className="p-4 text-center">
+                <p className="font-semibold text-slate-900">{f.name}</p>
+                <p className="text-sm text-orange-700">{f.role}</p>
+              </div>
+            </div>
+          ))}
         </div>
       </section>
 
