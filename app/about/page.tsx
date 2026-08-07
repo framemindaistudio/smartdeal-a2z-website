@@ -76,10 +76,8 @@ export default function AboutPage() {
         <SectionHeading eyebrow="Leadership" title="Founder" align="center" />
         <div className="flex flex-wrap justify-center gap-8">
           {FOUNDERS.map((f) => (
-            <div key={f.name} className="w-56 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
-              <div className="relative aspect-[3/4] w-full">
-                <Image src={f.photo} alt={f.name} fill sizes="224px" className="object-cover" />
-              </div>
+            <div key={f.name} className="w-full max-w-xl overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+              <Image src={f.photo} alt={f.name} width={1448} height={1086} className="h-auto w-full" />
               <div className="p-4 text-center">
                 <p className="font-semibold text-slate-900">{f.name}</p>
                 <p className="text-sm text-orange-700">{f.role}</p>
