@@ -7,7 +7,7 @@ import PlaceholderImage from "@/components/PlaceholderImage";
 import { SITE_CONFIG } from "@/lib/site-config";
 
 const FOUNDERS = [
-  { name: "Rajesh Dattani", role: "Founder", photo: "/team/rajesh-dattani.png" },
+  { name: "Rajesh Dantani", role: "Founder", photo: "/team/rajesh-dantani.png" },
 ];
 
 export const metadata: Metadata = {
