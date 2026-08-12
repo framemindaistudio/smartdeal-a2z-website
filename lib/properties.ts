@@ -195,6 +195,53 @@ export const PROPERTIES: Property[] = [
     nearbyFacilities: ["IT park – 1.5 km", "Bus stop – 0.2 km", "Supermarket – 0.5 km"],
     photoLabels: ["Living Room", "Bedroom", "Kitchen"],
   },
+  {
+    // Partner-developer project (Saiccha Developers) — figures below combine what's
+    // confirmed with the sales team (acreage, plot count, per-Guntha pricing) with
+    // amenities/connectivity pulled from the project's own live page, which as of
+    // this writing still shows exact pricing as "being finalized" publicly.
+    slug: "rudra-valley-farm-plots-amboli-ghat",
+    title: "Rudra Valley — Farmhouse Plots",
+    type: "Plot",
+    purpose: "For Sale",
+    price: 600000,
+    location: "Amboli Ghat",
+    city: "Sindhudurg",
+    bedrooms: 0,
+    bathrooms: 0,
+    areaSqft: 1089, // 1 Guntha
+    featured: true,
+    summary: "Premium farmhouse plots in the misty hills of Amboli Ghat, on the Goa border.",
+    description:
+      "Phase 1 of a 233-acre farm-plot development (337 plots) laid out in numbered rows along a central spine road in Amboli Ghat. Plots start at 1 Guntha for ₹6L, scaling to 11 Guntha for ₹66L and beyond, with resort-style amenities and the upcoming Goa–Nagpur Shaktipath highway just 800m away.",
+    descriptionHighlight: "233-acre farm-plot development",
+    highlights: ["Phase 1 — 233 acres, 337 plots", "Plots from 1 to 11+ Guntha", "800 m from upcoming Shaktipath highway", "Guarded entrance, central spine road layout"],
+    amenities: ["Clubhouse & wellness center", "Swimming pool & spa", "Five-star gymnasium", "Tennis lawn", "Children's park", "Restaurant", "River rafting", "Viewing deck"],
+    nearbyFacilities: ["Goa International Airport – 50 km", "Amboli & Napharde waterfalls – 10 km", "Malvan Airport – 70 km", "Upcoming Shaktipath highway – 800 m"],
+    photoLabels: ["Entrance Gate", "Clubhouse", "Plot Layout", "Viewing Deck", "Amboli Hills"],
+  },
+  {
+    // Same partner-developer sourcing note as Rudra Valley above.
+    slug: "jagkalyan-tarak-gurukul-na-plots-dodamarg",
+    title: "JagKalyan Tarak Gurukul — NA Plots",
+    type: "Plot",
+    purpose: "For Sale",
+    price: 2100000,
+    location: "Dodamarg",
+    city: "Sindhudurg",
+    bedrooms: 0,
+    bathrooms: 0,
+    areaSqft: 1634, // 1.5 Guntha (~150 sq.m)
+    featured: true,
+    summary: "Gated NA plots beside the JagKalyan Gurukul campus in Dodamarg, near the Goa border.",
+    description:
+      "A 300-acre gated, plotted scheme (3,000 plots planned; Phase 1 releases 1,000) in Khanyale village, Dodamarg, right beside the JagKalyan Holistic Mission campus. Plots start at 1.5 Guntha (~150 sq.m) for ₹21L, on wide 15m/12m internal roads with a cricket stadium, sports centre and landscaped water body.",
+    descriptionHighlight: "300-acre gated, plotted scheme",
+    highlights: ["300 acres — 3,000 plots planned (1,000 in Phase 1)", "150 sq.m (~1.5 Guntha) & 500 sq.m formats", "Beside JagKalyan Holistic Mission campus", "Gated scheme, 15m & 12m internal roads"],
+    amenities: ["Cricket stadium", "Sports centre", "Shopping centre", "Landscaped water body", "Decorative entrance gate", "Watch towers", "Dedicated parking"],
+    nearbyFacilities: ["JagKalyan Holistic Mission campus – adjacent", "Khanyale village, Dodamarg taluka", "Sindhudurg district, Maharashtra"],
+    photoLabels: ["Entrance Gate", "Water Body", "Plot Layout", "Sports Centre"],
+  },
 ];
 
 export function getPropertyBySlug(slug: string): Property | undefined {
