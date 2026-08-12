@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { BedDouble, Bath, Ruler, MapPin } from "lucide-react";
 import PlaceholderImage from "./PlaceholderImage";
 import { formatPrice, type Property } from "@/lib/properties";
@@ -20,12 +21,24 @@ export default function PropertyCard({
       }`}
     >
       <div className={isList ? "sm:w-72 shrink-0" : ""}>
-        <PlaceholderImage
-          label={property.photoLabels[0] ?? property.title}
-          variant="neutral"
-          aspect={isList ? "aspect-[4/3] sm:h-full sm:aspect-auto" : "aspect-[4/3]"}
-          className="rounded-none"
-        />
+        {property.photos?.[0] ? (
+          <div className={`relative w-full ${isList ? "aspect-[4/3] sm:h-full sm:aspect-auto" : "aspect-[4/3]"}`}>
+            <Image
+              src={property.photos[0]}
+              alt={property.photoLabels[0] ?? property.title}
+              fill
+              sizes="(min-width: 640px) 33vw, 100vw"
+              className="object-cover"
+            />
+          </div>
+        ) : (
+          <PlaceholderImage
+            label={property.photoLabels[0] ?? property.title}
+            variant="neutral"
+            aspect={isList ? "aspect-[4/3] sm:h-full sm:aspect-auto" : "aspect-[4/3]"}
+            className="rounded-none"
+          />
+        )}
       </div>
 
       <div className="flex flex-1 flex-col p-5">

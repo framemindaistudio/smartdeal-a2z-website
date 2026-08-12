@@ -24,7 +24,9 @@ export interface Property {
   highlights: string[];
   amenities: string[];
   nearbyFacilities: string[];
-  photoLabels: string[]; // labels for placeholder gallery tiles
+  photoLabels: string[]; // labels for placeholder gallery tiles, used as alt text when `photos` is set
+  /** Real gallery images, same order as `photoLabels`. Falls back to PlaceholderImage tiles when absent. */
+  photos?: string[];
 }
 
 export const PROPERTIES: Property[] = [
@@ -51,7 +53,14 @@ export const PROPERTIES: Property[] = [
     highlights: ["Phase 1 — 233 acres, 337 plots", "Plots from 1 to 11+ Guntha", "800 m from upcoming Shaktipath highway", "Guarded entrance, central spine road layout"],
     amenities: ["Clubhouse & wellness center", "Swimming pool & spa", "Five-star gymnasium", "Tennis lawn", "Children's park", "Restaurant", "River rafting", "Viewing deck"],
     nearbyFacilities: ["Goa International Airport – 50 km", "Amboli & Napharde waterfalls – 10 km", "Malvan Airport – 70 km", "Upcoming Shaktipath highway – 800 m"],
-    photoLabels: ["Entrance Gate", "Clubhouse", "Plot Layout", "Viewing Deck", "Amboli Hills"],
+    photoLabels: ["Entrance Gate", "Aerial View", "Clubhouse", "Recreational Canal", "Plot Layout"],
+    photos: [
+      "/properties/rudra-valley/entrance-gate.jpg",
+      "/properties/rudra-valley/aerial-view.jpg",
+      "/properties/rudra-valley/clubhouse.jpg",
+      "/properties/rudra-valley/recreational-canal.jpg",
+      "/properties/rudra-valley/plot-layout.jpg",
+    ],
   },
   {
     // Same partner-developer sourcing note as Rudra Valley above.
@@ -73,7 +82,14 @@ export const PROPERTIES: Property[] = [
     highlights: ["300 acres — 3,000 plots planned (1,000 in Phase 1)", "150 sq.m (~1.5 Guntha) & 500 sq.m formats", "Beside JagKalyan Holistic Mission campus", "Gated scheme, 15m & 12m internal roads"],
     amenities: ["Cricket stadium", "Sports centre", "Shopping centre", "Landscaped water body", "Decorative entrance gate", "Watch towers", "Dedicated parking"],
     nearbyFacilities: ["JagKalyan Holistic Mission campus – adjacent", "Khanyale village, Dodamarg taluka", "Sindhudurg district, Maharashtra"],
-    photoLabels: ["Entrance Gate", "Water Body", "Plot Layout", "Sports Centre"],
+    photoLabels: ["Entrance Gate", "Water Body", "Plot Layout", "Sports Centre", "Cricket Stadium"],
+    photos: [
+      "/properties/jagkalyan-tarak-gurukul/entrance-gate.jpg",
+      "/properties/jagkalyan-tarak-gurukul/water-body.jpg",
+      "/properties/jagkalyan-tarak-gurukul/plot-layout.png",
+      "/properties/jagkalyan-tarak-gurukul/sports-centre.jpg",
+      "/properties/jagkalyan-tarak-gurukul/cricket-stadium.jpg",
+    ],
   },
 ];
 

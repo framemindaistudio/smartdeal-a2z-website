@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import { BedDouble, Bath, Ruler, MapPin, Check, Phone } from "lucide-react";
 import PlaceholderImage from "@/components/PlaceholderImage";
@@ -67,9 +68,20 @@ export default async function PropertyDetailsPage(props: PageProps<"/properties/
       </div>
 
       <div className="mb-10 grid grid-cols-2 gap-3 sm:grid-cols-4">
-        {property.photoLabels.map((label, i) => (
-          <PlaceholderImage key={label} label={label} variant={i === 0 ? "brand" : "neutral"} className={i === 0 ? "col-span-2 row-span-2 sm:col-span-2 sm:row-span-2" : ""} />
-        ))}
+        {property.photoLabels.map((label, i) => {
+          const large = i === 0;
+          const photo = property.photos?.[i];
+          return photo ? (
+            <div
+              key={label}
+              className={`relative aspect-[4/3] overflow-hidden rounded-lg ${large ? "col-span-2 row-span-2 sm:col-span-2 sm:row-span-2" : ""}`}
+            >
+              <Image src={photo} alt={label} fill sizes={large ? "50vw" : "25vw"} className="object-cover" />
+            </div>
+          ) : (
+            <PlaceholderImage key={label} label={label} variant={large ? "brand" : "neutral"} className={large ? "col-span-2 row-span-2 sm:col-span-2 sm:row-span-2" : ""} />
+          );
+        })}
       </div>
 
       <div className="grid gap-10 lg:grid-cols-3">
