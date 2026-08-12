@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Fraunces } from "next/font/google";
+import { GoogleAnalytics } from "@next/third-parties/google";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ChatbotWidget from "@/components/ChatbotWidget";
@@ -42,6 +43,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <Footer />
         <ChatbotWidget />
       </body>
+      <GoogleAnalytics gaId={SITE_CONFIG.googleAnalyticsId} />
     </html>
   );
 }

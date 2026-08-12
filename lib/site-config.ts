@@ -21,6 +21,9 @@ export const SITE_CONFIG = {
   city: "India",
   businessHours: "Mon – Sat, 9:00 AM – 7:00 PM · Online enquiries 24×7 · Site visits by appointment",
   yearsInBusiness: "25+",
+  // GA4 measurement ID for the smartdeala2z.com web stream (Google Analytics admin,
+  // 2026-08-12). Not a secret — measurement IDs are meant to ship in client-side code.
+  googleAnalyticsId: "G-PKH0JHSW4V",
   social: {
     facebook: "",
     instagram: "",
