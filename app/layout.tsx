@@ -24,11 +24,24 @@ const fraunces = Fraunces({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_CONFIG.url),
   title: {
     default: `${SITE_CONFIG.name} | ${SITE_CONFIG.tagline}`,
     template: `%s | ${SITE_CONFIG.name}`,
   },
   description: SITE_CONFIG.description,
+  openGraph: {
+    title: `${SITE_CONFIG.name} | ${SITE_CONFIG.tagline}`,
+    description: SITE_CONFIG.description,
+    url: SITE_CONFIG.url,
+    siteName: SITE_CONFIG.name,
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${SITE_CONFIG.name} | ${SITE_CONFIG.tagline}`,
+    description: SITE_CONFIG.description,
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
