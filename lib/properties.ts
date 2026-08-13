@@ -51,7 +51,7 @@ export const PROPERTIES: Property[] = [
       "Phase 1 of a 233-acre farm-plot development (337 plots) laid out in numbered rows along a central spine road in Amboli Ghat. Plots start at 1 Guntha for ₹6L, scaling to 11 Guntha for ₹66L and beyond, with resort-style amenities and the upcoming Goa–Nagpur Shaktipath highway just 800m away.",
     descriptionHighlight: "233-acre farm-plot development",
     highlights: ["Phase 1 — 233 acres, 337 plots", "Plots from 1 to 11+ Guntha", "800 m from upcoming Shaktipath highway", "Guarded entrance, central spine road layout"],
-    amenities: ["Clubhouse & wellness center", "Swimming pool & spa", "Five-star gymnasium", "Tennis lawn", "Children's park", "Restaurant", "River rafting", "Viewing deck"],
+    amenities: ["Clubhouse & wellness center", "Swimming pool & spa", "Five-star gymnasium", "Tennis lawn", "Children's park", "Restaurant", "River rafting", "Viewing deck", "Event hall"],
     nearbyFacilities: ["Goa International Airport – 50 km", "Amboli & Napharde waterfalls – 10 km", "Malvan Airport – 70 km", "Upcoming Shaktipath highway – 800 m"],
     photoLabels: ["Entrance Gate", "Aerial View", "Clubhouse", "Recreational Canal", "Plot Layout"],
     photos: [
