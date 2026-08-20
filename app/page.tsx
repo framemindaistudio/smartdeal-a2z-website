@@ -1,9 +1,14 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { ShieldCheck, Handshake, LifeBuoy, BadgePercent, Lock } from "lucide-react";
 import PropertyHero from "@/components/PropertyHero";
 import PropertyCard from "@/components/PropertyCard";
 import SectionHeading from "@/components/SectionHeading";
 import { getFeaturedProperties, PROPERTY_TYPES } from "@/lib/properties";
+
+export const metadata: Metadata = {
+  alternates: { canonical: "/" },
+};
 
 // "Why Choose SmartDeal" — verbatim from the client's Homepage Content
 // onboarding section (filled in 2026-08-06), icons assigned by us.

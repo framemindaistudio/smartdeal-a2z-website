@@ -5,6 +5,7 @@ import { SITE_CONFIG } from "@/lib/site-config";
 export const metadata: Metadata = {
   title: "Terms & Conditions",
   description: `Terms & Conditions for ${SITE_CONFIG.name}.`,
+  alternates: { canonical: "/terms-conditions" },
 };
 
 export default function TermsConditionsPage() {

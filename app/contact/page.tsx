@@ -7,7 +7,8 @@ import { SITE_CONFIG } from "@/lib/site-config";
 
 export const metadata: Metadata = {
   title: "Contact Us",
-  description: `Get in touch with ${SITE_CONFIG.name}.`,
+  description: `Get in touch with ${SITE_CONFIG.name} — call, email, or send an enquiry directly through our contact form. We're happy to help with buying, selling or renting property.`,
+  alternates: { canonical: "/contact" },
 };
 
 const DETAILS = [

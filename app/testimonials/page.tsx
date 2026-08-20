@@ -4,7 +4,8 @@ import { CoverflowCarousel, type CoverflowSlide } from "@/components/ui/coverflo
 
 export const metadata: Metadata = {
   title: "Testimonials",
-  description: "What our clients say.",
+  description: "What clients say about buying, selling and renting property with SmartDeal A2Z.",
+  alternates: { canonical: "/testimonials" },
 };
 
 // Placeholder testimonials — replace with real client quotes once submitted

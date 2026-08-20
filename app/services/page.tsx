@@ -5,7 +5,8 @@ import PageHero from "@/components/PageHero";
 
 export const metadata: Metadata = {
   title: "Services",
-  description: "Services offered by SmartDeal A2Z.",
+  description: "End-to-end real estate services from SmartDeal A2Z — property buying and selling assistance, rentals, investment advisory, consultation, legal assistance and home loan support.",
+  alternates: { canonical: "/services" },
 };
 
 // From the client's Services onboarding checklist (2026-08-06). That checklist

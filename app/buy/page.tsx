@@ -7,7 +7,8 @@ import { getFeaturedProperties } from "@/lib/properties";
 
 export const metadata: Metadata = {
   title: "Buy Property",
-  description: "Browse verified properties for sale and find your next home.",
+  description: "Buy verified homes, apartments, villas and plots with SmartDeal A2Z. Search by location, property type and budget, and connect directly with sellers — no middlemen.",
+  alternates: { canonical: "/buy" },
 };
 
 export default function BuyPage() {

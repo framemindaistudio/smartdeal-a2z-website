@@ -44,6 +44,27 @@ export const metadata: Metadata = {
   },
 };
 
+// Site-wide business identity for search engines. Deliberately omits `address` —
+// SITE_CONFIG.address is still "Address to be provided by client", and publishing
+// a placeholder as structured data would tell Google something false. `sameAs`
+// only includes social links that are actually filled in, so it's empty (and
+// omitted) today but picks up real profiles automatically once SITE_CONFIG.social
+// is filled in — no schema edit needed then.
+const socialLinks = Object.values(SITE_CONFIG.social).filter(Boolean);
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "RealEstateAgent",
+  name: SITE_CONFIG.name,
+  alternateName: SITE_CONFIG.shortName,
+  description: SITE_CONFIG.description,
+  url: SITE_CONFIG.url,
+  logo: `${SITE_CONFIG.url}/logo.png`,
+  image: `${SITE_CONFIG.url}/logo.png`,
+  telephone: SITE_CONFIG.phone,
+  email: SITE_CONFIG.email,
+  ...(socialLinks.length > 0 ? { sameAs: socialLinks } : {}),
+};
+
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
@@ -51,6 +72,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${geistSans.variable} ${geistMono.variable} ${fraunces.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col bg-white text-slate-900">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+        />
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />

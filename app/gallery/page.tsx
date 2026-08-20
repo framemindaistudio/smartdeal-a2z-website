@@ -5,7 +5,8 @@ import { PROPERTIES } from "@/lib/properties";
 
 export const metadata: Metadata = {
   title: "Gallery",
-  description: "A look at our properties and spaces.",
+  description: "Browse photos of SmartDeal A2Z's listed properties — homes, plots and commercial spaces across our current inventory.",
+  alternates: { canonical: "/gallery" },
 };
 
 const GALLERY_TILES = PROPERTIES.flatMap((p) =>

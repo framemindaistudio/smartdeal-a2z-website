@@ -31,9 +31,24 @@ export async function generateMetadata(props: PageProps<"/properties/[slug]">): 
   const { slug } = await props.params;
   const property = getPropertyBySlug(slug);
   if (!property) return {};
+  const title = `${property.title} — ${property.type} ${property.purpose} in ${property.location}, ${property.city}`;
+  const description = `${property.summary} ${formatPrice(property.price, property.purpose)} · ${property.areaSqft.toLocaleString("en-IN")} sqft.`;
   return {
-    title: property.title,
-    description: property.summary,
+    title,
+    description,
+    alternates: { canonical: `/properties/${slug}` },
+    openGraph: {
+      title,
+      description,
+      url: `/properties/${slug}`,
+      images: property.photos?.[0] ? [property.photos[0]] : undefined,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: property.photos?.[0] ? [property.photos[0]] : undefined,
+    },
   };
 }
 
@@ -46,9 +61,44 @@ export default async function PropertyDetailsPage(props: PageProps<"/properties/
   }
 
   const related = getRelatedProperties(property);
+  const propertyUrl = `${SITE_CONFIG.url}/properties/${property.slug}`;
+
+  const productSchema = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name: property.title,
+    description: property.description,
+    url: propertyUrl,
+    image: property.photos?.length ? property.photos.map((p) => `${SITE_CONFIG.url}${p}`) : undefined,
+    category: property.type,
+    offers: {
+      "@type": "Offer",
+      price: property.price,
+      priceCurrency: "INR",
+      availability: "https://schema.org/InStock",
+      url: propertyUrl,
+    },
+  };
+
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Properties", item: `${SITE_CONFIG.url}/properties` },
+      { "@type": "ListItem", position: 2, name: property.title, item: propertyUrl },
+    ],
+  };
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 lg:px-8">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
       <nav className="mb-4 text-sm text-slate-500">
         <span>Properties</span> <span className="mx-1">/</span> <span className="text-slate-700">{property.title}</span>
       </nav>

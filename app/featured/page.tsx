@@ -5,7 +5,8 @@ import { getFeaturedProperties } from "@/lib/properties";
 
 export const metadata: Metadata = {
   title: "Featured Properties",
-  description: "A curated selection of our most sought-after listings.",
+  description: "A curated selection of SmartDeal A2Z's most sought-after listings — verified homes, plots and commercial properties handpicked for buyers and investors.",
+  alternates: { canonical: "/featured" },
 };
 
 export default function FeaturedPage() {

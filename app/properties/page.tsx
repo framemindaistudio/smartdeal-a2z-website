@@ -4,7 +4,10 @@ import PropertiesExplorer from "@/components/PropertiesExplorer";
 
 export const metadata: Metadata = {
   title: "All Properties",
-  description: "Browse and filter our full inventory of properties.",
+  description: "Browse and filter SmartDeal A2Z's full property inventory by location, budget, type, bedrooms, bathrooms and area — homes, plots and commercial spaces for sale and rent.",
+  // Canonicalizes to the base listing page regardless of filter query params,
+  // so Google doesn't treat every filter combination as a separate duplicate page.
+  alternates: { canonical: "/properties" },
 };
 
 function firstValue(value: string | string[] | undefined): string {

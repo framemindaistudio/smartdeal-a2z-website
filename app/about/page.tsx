@@ -12,7 +12,8 @@ const FOUNDERS = [
 
 export const metadata: Metadata = {
   title: "About Us",
-  description: `Learn more about ${SITE_CONFIG.name}.`,
+  description: `${SITE_CONFIG.name} is a next-generation PropTech platform with ${SITE_CONFIG.yearsInBusiness} years of experience, connecting buyers, sellers, builders, developers, brokers and investors on one secure real estate ecosystem.`,
+  alternates: { canonical: "/about" },
 };
 
 // VALUES card text is text-sm ambient, so one step up is text-base. The two intro

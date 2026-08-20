@@ -6,7 +6,8 @@ import ContactForm from "@/components/ContactForm";
 
 export const metadata: Metadata = {
   title: "Sell Property",
-  description: "List your property with SmartDeal A2Z and reach genuine buyers.",
+  description: "List your property with SmartDeal A2Z and reach genuine, actively-searching buyers. Share your property details and our team handles listing, discovery and buyer connections.",
+  alternates: { canonical: "/sell" },
 };
 
 const EMPHASIS = "text-base font-bold text-slate-900";

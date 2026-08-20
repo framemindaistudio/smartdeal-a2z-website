@@ -7,7 +7,8 @@ import { PROPERTIES } from "@/lib/properties";
 
 export const metadata: Metadata = {
   title: "Rent a Property",
-  description: "Browse verified rental listings — homes, apartments and commercial spaces.",
+  description: "Find verified rental homes, apartments and commercial spaces with SmartDeal A2Z. Filter by location, budget and move-in needs, and enquire directly with no middlemen.",
+  alternates: { canonical: "/rent" },
 };
 
 export default function RentPage() {
