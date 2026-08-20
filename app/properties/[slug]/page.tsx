@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { BedDouble, Bath, Ruler, MapPin, Check, Phone } from "lucide-react";
+import { BedDouble, Bath, Ruler, MapPin, Check, Phone, Download } from "lucide-react";
 import PlaceholderImage from "@/components/PlaceholderImage";
 import PropertyCard from "@/components/PropertyCard";
 import ContactForm from "@/components/ContactForm";
@@ -150,6 +150,15 @@ export default async function PropertyDetailsPage(props: PageProps<"/properties/
           >
             <Phone className="h-4 w-4" /> Call About This Property
           </a>
+          {property.brochureUrl && (
+            <a
+              href={property.brochureUrl}
+              download
+              className="flex w-full items-center justify-center gap-2 rounded-md border-2 border-brand px-4 py-3 text-sm font-semibold text-brand transition-colors hover:bg-brand hover:text-white"
+            >
+              <Download className="h-4 w-4" /> Download Brochure
+            </a>
+          )}
           <ContactForm context={`Property Enquiry: ${property.title}`} />
         </div>
       </div>

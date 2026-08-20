@@ -27,6 +27,8 @@ export interface Property {
   photoLabels: string[]; // labels for placeholder gallery tiles, used as alt text when `photos` is set
   /** Real gallery images, same order as `photoLabels`. Falls back to PlaceholderImage tiles when absent. */
   photos?: string[];
+  /** Downloadable brochure PDF, if one exists for this listing. */
+  brochureUrl?: string;
 }
 
 export const PROPERTIES: Property[] = [
@@ -61,6 +63,7 @@ export const PROPERTIES: Property[] = [
       "/properties/rudra-valley/recreational-canal.jpg",
       "/properties/rudra-valley/plot-layout.jpg",
     ],
+    brochureUrl: "/properties/rudra-valley/brochure.pdf",
   },
   {
     // Same partner-developer sourcing note as Rudra Valley above.
@@ -90,6 +93,7 @@ export const PROPERTIES: Property[] = [
       "/properties/jagkalyan-tarak-gurukul/sports-centre.jpg",
       "/properties/jagkalyan-tarak-gurukul/cricket-stadium.jpg",
     ],
+    brochureUrl: "/properties/jagkalyan-tarak-gurukul/brochure.pdf",
   },
 ];
 

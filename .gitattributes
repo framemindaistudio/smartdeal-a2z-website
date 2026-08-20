@@ -1,0 +1,11 @@
+# Explicit binary declarations so git never attempts line-ending normalization
+# on these — content-sniffing alone isn't something to trust for files like a
+# client-facing brochure PDF, where silent corruption would only surface when
+# someone actually tries to open the download.
+*.pdf binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.ico binary
+*.woff binary
+*.woff2 binary
