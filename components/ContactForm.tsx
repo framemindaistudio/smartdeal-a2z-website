@@ -2,6 +2,7 @@
 
 import { useState, type FormEvent } from "react";
 import { SITE_CONFIG } from "@/lib/site-config";
+import { GOOGLE_FORM_ACTION_URL, GOOGLE_FORM_ENTRY_IDS } from "@/lib/google-form";
 
 export default function ContactForm({
   context = "General Enquiry",
@@ -13,18 +14,36 @@ export default function ContactForm({
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
 
-  function handleSubmit(e: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setSubmitting(true);
 
-    // No backend/CRM in this build's scope (Web Only, per proposal). This is a
-    // placeholder handler so the form is demonstrable end-to-end. Wire this up to
-    // a real form backend (e.g. a Next.js Route Handler + email service, or
-    // Formspree/EmailJS) once the client's domain + email are finalized.
-    window.setTimeout(() => {
-      setSubmitting(false);
-      setSubmitted(true);
-    }, 500);
+    const form = new FormData(e.currentTarget);
+    const body = new URLSearchParams();
+    for (const [field, entryId] of Object.entries(GOOGLE_FORM_ENTRY_IDS)) {
+      const value = form.get(field);
+      if (value) body.append(entryId, value.toString());
+    }
+
+    try {
+      // Google's formResponse endpoint sends no CORS headers, so the response
+      // can't be read from the browser - "no-cors" is required, which means
+      // this resolves even if the form rejects the submission server-side
+      // (e.g. a required question left blank). Verified end-to-end against
+      // the real form before relying on it; the mailto fallback below still
+      // works regardless.
+      await fetch(GOOGLE_FORM_ACTION_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: body.toString(),
+      });
+    } catch {
+      // Network failure only - see no-cors note above.
+    }
+
+    setSubmitting(false);
+    setSubmitted(true);
   }
 
   if (submitted) {
